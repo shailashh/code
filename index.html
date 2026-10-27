@@ -1,0 +1,3828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study Code - Material</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            margin: 0;
+            overflow: hidden; /* App-like feel */
+        }
+
+        .font-mono {
+            font-family: 'Fira Code', monospace;
+        }
+
+        /* VS Code Style Scrollbars */
+        ::-webkit-scrollbar {
+            width: 12px;
+            height: 12px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #424242;
+            border: 3px solid transparent;
+            background-clip: padding-box;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4f4f4f;
+            border: 3px solid transparent;
+            background-clip: padding-box;
+        }
+
+        /* Hide details marker */
+        details > summary {
+            list-style: none;
+        }
+        details > summary::-webkit-details-marker {
+            display: none;
+        }
+        
+        .chevron {
+            transition: transform 0.2s;
+        }
+        details[open] > summary .chevron {
+            transform: rotate(90deg);
+        }
+
+        /* Mobile Sidebar Transition */
+        #sidebar {
+            transition: transform 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="h-screen w-screen flex flex-col selection:bg-[#264f78]">
+
+    <!-- Top Bar (Title Bar) -->
+    <div class="h-8 bg-[#333333] flex items-center justify-between px-3 shrink-0 select-none border-b border-[#252526]">
+        <div class="flex items-center gap-3 w-1/3">
+            <!-- Mobile Menu Toggle -->
+            <button id="menu-btn" class="md:hidden text-gray-400 hover:text-white focus:outline-none">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+            <div class="flex gap-1.5 hidden sm:flex">
+                <div class="w-3 h-3 rounded-full bg-[#ff5f56]"></div>
+                <div class="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
+                <div class="w-3 h-3 rounded-full bg-[#27c93f]"></div>
+            </div>
+        </div>
+        <div class="text-xs text-[#858585] text-center w-1/3 truncate font-mono">
+            VS Code Material
+        </div>
+        <div class="w-1/3"></div> <!-- Spacer -->
+    </div>
+
+    <!-- Main Workspace -->
+    <div class="flex-1 flex overflow-hidden relative">
+        
+        <!-- Activity Bar (Very thin left bar) -->
+        <div class="w-12 bg-[#333333] flex-col items-center py-3 gap-6 hidden md:flex shrink-0 z-20">
+            <div class="text-[#858585] hover:text-white cursor-pointer relative group">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 7v8a2 2 0 002 2h6M8 7V5a2 2 0 012-2h4.586a1 1 0 01.707.293l4.414 4.414a1 1 0 01.293.707V15a2 2 0 01-2 2h-2M8 7H6a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2v-2"></path></svg>
+                <div class="absolute left-0 top-0 bottom-0 w-0.5 bg-[#007acc] -ml-3"></div>
+            </div>
+            <div class="text-[#858585] hover:text-white cursor-pointer group">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+            </div>
+        </div>
+
+        <!-- Sidebar (Explorer) -->
+        <div id="sidebar" class="absolute md:relative z-10 w-64 h-full bg-[#252526] flex flex-col shrink-0 transform -translate-x-full md:translate-x-0 border-r border-[#1e1e1e] shadow-2xl md:shadow-none">
+            <div class="h-9 flex items-center px-4 text-[11px] font-semibold text-[#bbbbbb] tracking-wider shrink-0 select-none">
+                EXPLORER
+            </div>
+            
+            <div class="flex-1 overflow-y-auto pb-4">
+                
+                <!-- SUBJECT 1: MERN -->
+                <details open class="group">
+                    <summary class="cursor-pointer hover:bg-[#2a2d2e] px-1 py-1 flex items-center gap-1 text-[13px] font-mono select-none text-[#cccccc]">
+                        <svg class="w-4 h-4 chevron text-[#858585]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        <svg class="w-4 h-4 text-[#dcb67a]" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path></svg>
+                        MERN
+                    </summary>
+                    <div class="ml-4 pl-2 border-l border-[#404040]">
+                        <!-- Module 1 -->
+                        <details open class="group mt-1">
+                            <summary class="cursor-pointer hover:bg-[#2a2d2e] px-1 py-1 flex items-center gap-1 text-[13px] font-mono select-none text-[#cccccc]">
+                                <svg class="w-4 h-4 chevron text-[#858585]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                <svg class="w-4 h-4 text-[#dcb67a]" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path></svg>
+                                Module 1
+                            </summary>
+                            <div class="ml-4 pl-2 border-l border-[#404040]">
+                                <div class="file-item hover:bg-[#2a2d2e] px-1 py-1 cursor-pointer flex items-center gap-1.5 text-[13px] font-mono text-[#cccccc]" data-id="mern-m1-aim1">
+                                    <svg class="w-4 h-4 text-[#519aba]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                                    <span class="truncate">Aim 1: JS Basics</span>
+                                </div>
+                                <div class="file-item hover:bg-[#2a2d2e] px-1 py-1 cursor-pointer flex items-center gap-1.5 text-[13px] font-mono text-[#cccccc]" data-id="mern-m1-aim2">
+                                    <svg class="w-4 h-4 text-[#519aba]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                                    <span class="truncate">Aim 2: Core JS</span>
+                                </div>
+                                <div class="file-item hover:bg-[#2a2d2e] px-1 py-1 cursor-pointer flex items-center gap-1.5 text-[13px] font-mono text-[#cccccc]" data-id="mern-m1-aim3">
+                                    <svg class="w-4 h-4 text-[#519aba]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                                    <span class="truncate">Aim 3: React Intro</span>
+                                </div>
+                                <div class="file-item hover:bg-[#2a2d2e] px-1 py-1 cursor-pointer flex items-center gap-1.5 text-[13px] font-mono text-[#cccccc]" data-id="mern-m1-aim4">
+                                    <svg class="w-4 h-4 text-[#519aba]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                                    <span class="truncate">Aim 4: React Comps</span>
+                                </div>
+                                <div class="file-item hover:bg-[#2a2d2e] px-1 py-1 cursor-pointer flex items-center gap-1.5 text-[13px] font-mono text-[#cccccc]" data-id="mern-m1-aim5">
+                                    <svg class="w-4 h-4 text-[#519aba]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                                    <span class="truncate">Aim 5: React Routing</span>
+                                </div>
+                            </div>
+                        </details>
+                        <!-- Module 2 -->
+                        <details open class="group mt-1">
+                            <summary class="cursor-pointer hover:bg-[#2a2d2e] px-1 py-1 flex items-center gap-1 text-[13px] font-mono select-none text-[#cccccc]">
+                                <svg class="w-4 h-4 chevron text-[#858585]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                <svg class="w-4 h-4 text-[#dcb67a]" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path></svg>
+                                Module 2
+                            </summary>
+                            <div class="ml-4 pl-2 border-l border-[#404040]">
+                                <div class="file-item hover:bg-[#2a2d2e] px-1 py-1 cursor-pointer flex items-center gap-1.5 text-[13px] font-mono text-[#cccccc]" data-id="mern-m2-aim6">
+                                    <svg class="w-4 h-4 text-[#519aba]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                                    <span class="truncate">Aim 6: Express Basics</span>
+                                </div>
+                                <div class="file-item hover:bg-[#2a2d2e] px-1 py-1 cursor-pointer flex items-center gap-1.5 text-[13px] font-mono text-[#cccccc]" data-id="mern-m2-aim7">
+                                    <svg class="w-4 h-4 text-[#519aba]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                                    <span class="truncate">Aim 7: MongoDB and Compass</span>
+                                </div>
+                                <div class="file-item hover:bg-[#2a2d2e] px-1 py-1 cursor-pointer flex items-center gap-1.5 text-[13px] font-mono text-[#cccccc]" data-id="mern-m2-aim8">
+                                    <svg class="w-4 h-4 text-[#519aba]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                                    <span class="truncate">Aim 8: API Creation and Integration</span>
+                                </div>
+                                <div class="file-item hover:bg-[#2a2d2e] px-1 py-1 cursor-pointer flex items-center gap-1.5 text-[13px] font-mono text-[#cccccc]" data-id="mern-m2-aim9">
+                                    <svg class="w-4 h-4 text-[#519aba]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                                    <span class="truncate">Aim 9: React + Axios Integration</span>
+                                </div>
+                                <div class="file-item hover:bg-[#2a2d2e] px-1 py-1 cursor-pointer flex items-center gap-1.5 text-[13px] font-mono text-[#cccccc]" data-id="mern-m2-aim10">
+                                    <svg class="w-4 h-4 text-[#519aba]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                                    <span class="truncate">Aim 10: MERN CRUD App</span>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                </details>
+
+                <!-- SUBJECT 2: .NET -->
+                <details class="group mt-1">
+                    <summary class="cursor-pointer hover:bg-[#2a2d2e] px-1 py-1 flex items-center gap-1 text-[13px] font-mono select-none text-[#cccccc]">
+                        <svg class="w-4 h-4 chevron text-[#858585]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        <svg class="w-4 h-4 text-[#dcb67a]" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path></svg>
+                        .NET
+                    </summary>
+                    <div class="ml-4 pl-2 border-l border-[#404040]">
+                        <details class="group mt-1">
+                            <summary class="cursor-pointer hover:bg-[#2a2d2e] px-1 py-1 flex items-center gap-1 text-[13px] font-mono select-none text-[#cccccc]">
+                                <svg class="w-4 h-4 chevron text-[#858585]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                <svg class="w-4 h-4 text-[#dcb67a]" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path></svg>
+                                Module 1
+                            </summary>
+                            <div class="ml-4 pl-2 border-l border-[#404040]">
+                                <div class="file-item hover:bg-[#2a2d2e] px-1 py-1 cursor-pointer flex items-center gap-1.5 text-[13px] font-mono text-[#cccccc]" data-id="dotnet-m1-aim1">
+                                    <svg class="w-4 h-4 text-[#519aba]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                                    <span class="truncate">Aim 1: Hello World</span>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                </details>
+
+                <!-- SUBJECT 3: EJ -->
+                <details class="group mt-1">
+                    <summary class="cursor-pointer hover:bg-[#2a2d2e] px-1 py-1 flex items-center gap-1 text-[13px] font-mono select-none text-[#cccccc]">
+                        <svg class="w-4 h-4 chevron text-[#858585]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                        <svg class="w-4 h-4 text-[#dcb67a]" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path></svg>
+                        EJ
+                    </summary>
+                    <div class="ml-4 pl-2 border-l border-[#404040]">
+                        <details class="group mt-1">
+                            <summary class="cursor-pointer hover:bg-[#2a2d2e] px-1 py-1 flex items-center gap-1 text-[13px] font-mono select-none text-[#cccccc]">
+                                <svg class="w-4 h-4 chevron text-[#858585]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                                <svg class="w-4 h-4 text-[#dcb67a]" fill="currentColor" viewBox="0 0 20 20"><path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"></path></svg>
+                                Module 1
+                            </summary>
+                            <div class="ml-4 pl-2 border-l border-[#404040]">
+                                <div class="file-item hover:bg-[#2a2d2e] px-1 py-1 cursor-pointer flex items-center gap-1.5 text-[13px] font-mono text-[#cccccc]" data-id="ej-m1-aim1">
+                                    <svg class="w-4 h-4 text-[#519aba]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                                    <span class="truncate">Aim 1: Core Setup</span>
+                                </div>
+                            </div>
+                        </details>
+                    </div>
+                </details>
+
+            </div>
+        </div>
+
+        <!-- Overlay for mobile -->
+        <div id="overlay" class="absolute inset-0 bg-black/50 z-0 hidden md:hidden"></div>
+
+        <!-- Main Content Area (Editor) -->
+        <div class="flex-1 bg-[#1e1e1e] flex flex-col min-w-0">
+            <!-- Tabs -->
+            <div class="h-9 bg-[#2d2d2d] flex shrink-0 overflow-x-auto">
+                <div id="active-tab" class="px-4 py-2 bg-[#1e1e1e] text-[#007acc] border-t-2 border-[#007acc] text-[13px] font-mono flex items-center gap-2 cursor-pointer select-none border-r border-[#252526]">
+                    <svg class="w-4 h-4 text-[#519aba]" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path></svg>
+                    <span>welcome.md</span>
+                    <span id="close-tab-btn" class="ml-2 hover:bg-[#333333] rounded-md p-0.5 cursor-pointer"><svg class="w-3 h-3 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></span>
+                </div>
+            </div>
+
+            <!-- Breadcrumbs -->
+            <div id="active-breadcrumb" class="h-6 flex items-center px-4 text-[12px] font-mono text-[#858585] shadow-sm shrink-0">
+                Workspace <span class="mx-1 text-gray-500">></span> <span class="text-[#cccccc]">welcome.md</span>
+            </div>
+
+            <!-- Editor Content -->
+            <div class="flex-1 p-6 sm:p-10 overflow-y-auto">
+                <div class="max-w-4xl mx-auto">
+                    
+                    <!-- Question Header -->
+                    <h1 id="question-title" class="text-3xl font-bold text-white mb-6 border-b border-[#333333] pb-4">
+                        <span class="text-[#007acc]">Welcome</span>!
+                    </h1>
+
+                    <!-- Answer Content -->
+                    <div id="question-desc" class="space-y-5 text-[15px] leading-relaxed text-[#cccccc]">
+                        <p>Select an Aim from the sidebar on the left (MERN, .NET, EJ) to view its details, description, and code here.</p>
+                    </div>
+
+                    <!-- Pagination / Next Prev -->
+                    <div class="mt-12 pt-6 border-t border-[#333333] flex justify-between">
+                        <button id="prev-btn" disabled class="px-4 py-2 bg-[#2d2d2d] hover:bg-[#333333] disabled:opacity-50 disabled:cursor-not-allowed rounded text-[13px] font-mono text-[#858585] transition-colors">
+                            ← Previous Topic
+                        </button>
+                        <button id="next-btn" disabled class="px-4 py-2 bg-[#007acc] hover:bg-[#005f9e] disabled:opacity-50 disabled:cursor-not-allowed rounded text-[13px] font-mono text-white transition-colors">
+                            Next Topic →
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interactive Script -->
+    <script>
+        // Mobile Sidebar Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+
+        function toggleSidebar() {
+            sidebar.classList.toggle('-translate-x-full');
+            overlay.classList.toggle('hidden');
+        }
+
+        menuBtn.addEventListener('click', toggleSidebar);
+        overlay.addEventListener('click', toggleSidebar);
+
+        // --- DYNAMIC STUDY DATA ---
+        const studyData = {
+            'mern-m1-aim1': {
+                filename: 'aim1.js',
+                breadcrumb: 'MERN > Module 1 > Aim 1',
+                title: '<span class="text-[#007acc]">Aim 1:</span> Environmental Setup and JavaScripts Basics',
+                description: `
+                    <div class="space-y-6">
+                        <!-- Section A -->
+                        <div>
+                            <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">a) Install Node.js and Visual Studio Code, and verify installation.</h3>
+                            <p class="font-semibold text-white mb-1">Requirements:</p>
+                            <ul class="list-none ml-5 mb-3 text-[#cccccc] space-y-1">
+                                <li>- Node.js</li>
+                                <li>- Visual Studio Code</li>
+                                <li>- Command Prompt/Terminal</li>
+                                <li>- Web Browser</li>
+                                <li>- Basic knowledge of JavaScript</li>
+                            </ul>
+                            <p class="text-[#cccccc] mb-2">Node.js is a JavaScript runtime environment based on Chrome V8 engine.</p>
+                            <p class="text-[#cccccc] mb-3">NPM is the Node Package Manager used to manage packages.</p>
+                            <p class="font-semibold text-white mb-1">Steps:</p>
+                            <div class="ml-5 text-[#cccccc] space-y-2">
+                                <p>1. Download<br>Go to nodejs.org<br>Click on LTS version (it will show v24.x.x LTS).</p>
+                                <p>2. Install (Windows)<br>Run the .msi file you downloaded.<br>Next -> Next -> Accept</p>
+                                <p>3. Verify<br>Open Command Prompt/Terminal and verify the Node.js installation using:<br>
+                                <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">node –v</code><br><br>
+                                Verify npm using:<br>
+                                <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">npm –v</code></p>
+                                <p>4. Install Visual Studio Code.<br>It is a lightweight code editor with an integrated terminal and extensions support for MERN development.</p>
+                                <p>5. Open Visual Studio Code.</p>
+                            </div>
+                        </div>
+
+                        <!-- Section B -->
+                        <div>
+                            <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">b) Create a simple Node.js file and run it using terminal.</h3>
+                            <div class="ml-5 text-[#cccccc] space-y-2">
+                                <p>1. Create a folder named MERN_Practicals.</p>
+                                <p>2. Open the folder in VS Code.</p>
+                                <p>3. Create a file named app.js.</p>
+                                <p>4. Add JavaScript code.</p>
+                                <div class="code-container relative group mb-4 mt-2">
+                                    <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                    <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>console.log("Welcome to Node.js");</code></pre>
+                                </div>
+                                <p>console.log() – Used to print output on the terminal.</p>
+                                <p>Node filename.js – Used to execute a JavaScript file.</p>
+                                <p>Key Point: Every Node.js file should have a .js extension.</p>
+                                <p>5. Open the terminal.</p>
+                                <p>6. Run the Program using:<br>Node.js</p>
+                                <p>7. Output.</p>
+                            </div>
+                        </div>
+
+                        <!-- Section C -->
+                        <div>
+                            <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">c) Write a Node.js script demonstrating basic JavaScript commands (console log, variables, and arithmetic operations).</h3>
+                            <div class="ml-5 text-[#cccccc] space-y-2">
+                                <p>1. Create a file.</p>
+                                <p>2. Add JavaScript code.</p>
+                                <div class="code-container relative group mb-4 mt-2">
+                                    <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+<pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>console.log("Hello,MERN Developer!");
+
+let firstName="Vaishnavi";
+let age=19;
+const pi=3.14;
+
+console.log("Fisrt Name:",firstName);
+console.log("Age:",age);
+console.log("Value of PI:",pi);
+
+let num1=20;
+let num2=10;
+
+console.log("Arithmetic Operators");
+console.log("Addition:",num1+num2);
+console.log("Subtraction:",num1-num2);
+console.log("Multiplication:",num1*num2);
+console.log("Division",num1/num2);
+console.log("Modulus(Reminder):",num1%num2);
+console.log("Exponentiation ",num1**num2);
+
+age=age+5;
+console.log("New Age:",age);</code></pre>
+                                </div>
+                                <p>3. Open the terminal.</p>
+                                <p>4. Run the program using:<br>Node.js</p>
+                                <p>5. Output:-</p>
+                            </div>
+                        </div>
+
+                        <!-- Section D -->
+                        <div>
+                            <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">d) Create and run a simple program using variables and functions.</h3>
+                            <div class="ml-5 text-[#cccccc] space-y-2">
+                                <p>1. Add JavaScript code.</p>
+                                <div class="code-container relative group mb-4 mt-2">
+                                    <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+<pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>let name="Vaishnavi";
+let age=19;
+
+function display(PersonName, PersonAge)
+{
+    console.log("Hello "+PersonName+"!");
+    console.log("You are "+ PersonAge + " Years old");
+}
+display(name,age);</code></pre>
+                                </div>
+                                <p>2. Open the terminal.</p>
+                                <p>3. Run the program using:<br>Node.js</p>
+                                <p>4. Output:-</p>
+                            </div>
+                        </div>
+
+                        <!-- Section E -->
+                        <div>
+                            <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">e) Demonstrating use of operators and control statement in JavaScript.</h3>
+                            <div class="ml-5 text-[#cccccc] space-y-2">
+                                <p>1. Add JavaScript code.</p>
+                                <div class="code-container relative group mb-4 mt-2">
+                                    <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+<pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>let a=20;
+let b=10;
+
+console.log("Is a is greater than b?",a>b);
+console.log("Is a>15 AND b<15?",(a>15 && a<15));
+
+if(a>b)
+{
+    console.log("a is greater than b");
+}
+else{
+    console.log("b is greater than or equal to a");
+}
+
+let day=2;
+switch(day){
+    case 1:
+        console.log("Monday");
+        break;
+    case 2:
+        console.log("Tueday");
+        break;
+    case 3:
+        console.log("Wednesday");
+        break;
+    default:
+        console.log("Invalid Day");
+ }</code></pre>
+                                </div>
+                                <p>2. Open the terminal.</p>
+                                <p>3. Run the program using:<br>Node.js</p>
+                                <p>5. Output:-</p>
+                            </div>
+                        </div>
+
+                        <!-- Section F -->
+                        <div>
+                            <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">f) Write a program using loops and template literals.</h3>
+                            <div class="ml-5 text-[#cccccc] space-y-2">
+                                <p>1. Add JavaScript code.</p>
+                                <div class="code-container relative group mb-4 mt-2">
+                                    <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+<pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>let name="Vaishnavi";
+console.log("For Loop");
+for(let i=1; i<=3; i++)
+{
+     console.log(\`Hello \${name},for loop iteration \${i}\`);
+}
+console.log("\\n While Loop");
+let j=1;
+while(j<=3)
+{
+     console.log(\`Hello \${name},while loop iteration \${j} \`);
+     j++;
+}
+console.log("\\n Do-while Loop");
+let k=1;
+do
+{
+     console.log(\`Hello \${name},do-while loop iteration \${k} \`);
+     k++;
+}
+while(k<=3);</code></pre>
+                                </div>
+                                <p>2. Open the terminal.</p>
+                                <p>3. Run the program using:<br>Node.js</p>
+                                <p>5. Output:-</p>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            'mern-m1-aim2': {
+                filename: 'aim2.js',
+                breadcrumb: 'MERN > Module 1 > Aim 2',
+                title: '<span class="text-[#007acc]">Aim 2:</span> Core JavaScript Concept for MERN',
+                description: `
+                    <div class="space-y-6">
+                        <!-- Section A -->
+                        <div>
+                            <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">a) Write a program to create a function and call them with parameters.</h3>
+                            
+                            <div class="ml-5 text-[#cccccc] space-y-4">
+                                <div>
+                                    <p class="font-semibold text-white">1) To find whether the number is Odd or Even.</p>
+                                    <p class="ml-5">i) Add JavaScript Code.</p>
+                                    <div class="code-container relative my-2">
+                                        <button class="copy-btn absolute top-2 right-2 px-2 py-1 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] rounded text-[11px] font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                        <pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code class="language-javascript">function checkEvenOdd(num)
+{
+    if (num%2==0)
+    {
+        console.log(num+" is even");
+    }
+    else
+    {
+        console.log(num+" is Odd");
+    }
+}
+checkEvenOdd(12);
+checkEvenOdd(7);</code></pre>
+                                    </div>
+                                    <p class="ml-5">ii) Output:-</p>
+                                </div>
+
+                                <div>
+                                    <p class="font-semibold text-white">2) To find the Area of Rectangle.</p>
+                                    <p class="ml-5">i) Add JavaScript Code.</p>
+                                    <div class="code-container relative my-2">
+                                        <button class="copy-btn absolute top-2 right-2 px-2 py-1 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] rounded text-[11px] font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                        <pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code class="language-javascript">function rectangleArea(length,width)
+{
+    return length*width;
+}
+let area=rectangleArea(8,5);
+console.log("Area of Rectangle:",area);</code></pre>
+                                    </div>
+                                    <p class="ml-5">ii) Output:-</p>
+                                </div>
+
+                                <div>
+                                    <p class="font-semibold text-white">3) To display the Student Details.</p>
+                                    <p class="ml-5">i) Add JavaScript Code.</p>
+                                    <div class="code-container relative my-2">
+                                        <button class="copy-btn absolute top-2 right-2 px-2 py-1 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] rounded text-[11px] font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                        <pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code class="language-javascript">function stud(name,age,course)
+{
+    console.log("Name:",name);
+    console.log("Age:",age);
+    console.log("Course:",course);
+}
+stud("Vaishnavi",19,"MERN Stack");</code></pre>
+                                    </div>
+                                    <p class="ml-5">ii) Output:-</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section B -->
+                        <div>
+                            <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">b) Work with arrays and objects in JavaScript.</h3>
+                            <div class="ml-5 text-[#cccccc] space-y-2">
+                                <p>1. Open Visual Studio Code.</p>
+                                <p>2. Create a new file.</p>
+                                <p>3. Add JavaScript Code.</p>
+                                <div class="code-container relative my-2">
+                                    <button class="copy-btn absolute top-2 right-2 px-2 py-1 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] rounded text-[11px] font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                    <pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code class="language-javascript">let fruits=["Apple","Banana","Mango","Orange"];
+let student={
+     name:"Vaishnavi",
+     age:19,
+     course:"BSc IT"
+};
+console.log("First Fruit:",fruits[0]);
+console.log("Second Fruit:",fruits[1]);
+
+console.log("Student Name:",student.name);
+console.log("Course:",student.course);</code></pre>
+                                </div>
+                                <p>4. Output:-</p>
+                            </div>
+                        </div>
+
+                        <!-- Section C -->
+                        <div>
+                            <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">c) Demonstrate the use of Arrow Function.</h3>
+                            <p class="text-[#cccccc] mb-2">Definition:- Arrow function is shorter way to write a function.</p>
+                            <div class="ml-5 text-[#cccccc] space-y-4">
+                                <div>
+                                    <p class="font-semibold text-white">1) Without Parameter.</p>
+                                    <p class="ml-5">i) Add JavaScript Code.</p>
+                                    <div class="code-container relative my-2">
+                                        <button class="copy-btn absolute top-2 right-2 px-2 py-1 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] rounded text-[11px] font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                        <pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code class="language-javascript">const display=()=>
+{
+     console.log("Welcome to node.js");
+};
+display();</code></pre>
+                                    </div>
+                                    <p class="ml-5">ii) Output:-</p>
+                                </div>
+
+                                <div>
+                                    <p class="font-semibold text-white">2) One Parameter.</p>
+                                    <p class="ml-5">i) Add JavaScript Code.</p>
+                                    <div class="code-container relative my-2">
+                                        <button class="copy-btn absolute top-2 right-2 px-2 py-1 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] rounded text-[11px] font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                        <pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code class="language-javascript">const display=(name)=>
+{
+     console.log("Hello",name);
+};
+display("Vaishnavi");</code></pre>
+                                    </div>
+                                    <p class="ml-5">ii) Output:-</p>
+                                </div>
+
+                                <div>
+                                    <p class="font-semibold text-white">3) Arrow functions with multiple parameters.</p>
+                                    <p class="ml-5">i) Add JavaScript Code.</p>
+                                    <div class="code-container relative my-2">
+                                        <button class="copy-btn absolute top-2 right-2 px-2 py-1 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] rounded text-[11px] font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                        <pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code class="language-javascript">const add=(a,b)=>
+{
+     return a+b;
+};
+console.log("Sum=",add(10,20));</code></pre>
+                                    </div>
+                                    <p class="ml-5">ii) Output:-</p>
+                                </div>
+
+                                <div>
+                                    <p class="font-semibold text-white">4) Arrow functions with implicit return.</p>
+                                    <p class="ml-5">i) Add JavaScript Code.</p>
+                                    <div class="code-container relative my-2">
+                                        <button class="copy-btn absolute top-2 right-2 px-2 py-1 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] rounded text-[11px] font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                        <pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code class="language-javascript">const multiply=(a,b)=>a*b;
+console.log("Product=",multiply(5,6));</code></pre>
+                                    </div>
+                                    <p class="ml-5">ii) Output:-</p>
+                                </div>
+
+                                <div>
+                                    <p class="font-semibold text-white">5) Arrow function to check whether the number is Even or Odd.</p>
+                                    <p class="ml-5">i) Add JavaScript Code.</p>
+                                    <div class="code-container relative my-2">
+                                        <button class="copy-btn absolute top-2 right-2 px-2 py-1 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] rounded text-[11px] font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                        <pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code class="language-javascript">const checkSum=(num)=>{
+    if (num%2==0){
+        console.log(num+" is even");
+    }
+    else{
+        console.log(num+" is odd");
+    }
+}
+checkSum(12);
+checkSum(15);</code></pre>
+                                    </div>
+                                    <p class="ml-5">ii) Output:-</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section E (Array Methods) -->
+                        <div>
+                            <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">e) Write a program using Array Methods. (Map, Filter, Reduces).</h3>
+                            <ul class="list-none ml-5 mb-3 text-[#cccccc] space-y-1">
+                                <li><span class="font-semibold text-white">Map :-</span> Map methods creates new array by applying a function to every element of original array.</li>
+                                <li><span class="font-semibold text-white">Filter :-</span> It creates a new array containing only the elements that satisfy a condition.</li>
+                                <li><span class="font-semibold text-white">Reduces :-</span> Reduces all array elements to Single Value.</li>
+                            </ul>
+                            <div class="ml-5 text-[#cccccc] space-y-2">
+                                <p>1. Add JavaScript Code.</p>
+                                <div class="code-container relative my-2">
+                                    <button class="copy-btn absolute top-2 right-2 px-2 py-1 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] rounded text-[11px] font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                    <pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code class="language-javascript">const numbers=[10,15,20,25,30];
+const doubled=numbers.map(num=>num*2);
+console.log("Doubled Array:",doubled);
+const greaterthan20=numbers.filter(num=>num>20);
+console.log("Numbers greater than 20:",greaterthan20);
+const sum=numbers.reduce((total,num)=>total+num,0);
+console.log("Sum of array elements:",sum);</code></pre>
+                                </div>
+                                <p>2. Output:-</p>
+                            </div>
+                        </div>
+
+                        <!-- Section E (Objects) -->
+                        <div>
+                            <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">e) Create a program that manipulates objects and display outputs.</h3>
+                            <div class="ml-5 text-[#cccccc] space-y-2">
+                                <p>1. Add JavaScript Code.</p>
+                                <div class="code-container relative my-2">
+                                    <button class="copy-btn absolute top-2 right-2 px-2 py-1 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] rounded text-[11px] font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                    <pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code class="language-javascript">let Student={name:"Vaishnavi",age:19,course:"BSc IT",marks:95};
+console.log("Original Student Details:");
+console.log(Student);
+Student.city="Bhiwandi";
+Student.marks=96;
+delete Student.age;
+console.log("\\n Updated Student Details");
+console.log(Student);
+console.log("Name:",Student.name);
+console.log("Course:",Student.course);
+console.log("Marks:",Student.marks);
+console.log("City:",Student.city);</code></pre>
+                                </div>
+                                <p>2. Output:-</p>
+                            </div>
+                        </div>
+
+                        <!-- Section F -->
+                        <div>
+                            <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">f) Implement a small JavaScript program combining functions, arrays and Objects.</h3>
+                            <div class="ml-5 text-[#cccccc] space-y-2">
+                                <p>1. Add JavaScript Code.</p>
+                                <div class="code-container relative my-2">
+                                    <button class="copy-btn absolute top-2 right-2 px-2 py-1 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] rounded text-[11px] font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                    <pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code class="language-javascript">const employees = [
+     {
+          empID: 101,
+          name: "Vaishnavi",
+          department: "IT",
+          salary: 50000
+     },
+     {
+          empID: 102,
+          name: "Neha",
+          department: "HR",
+          salary: 45000
+     },
+     {
+          empID: 103,
+          name: "Gita",
+          department: "Finance",
+          salary: 40000
+     }
+];
+function displayEmployee(employeeList) {
+     console.log("--- Employee Details ---");
+    employeeList.forEach(function(employee) {
+          console.log("Employee ID:", employee.empID);
+        console.log("Name:", employee.name);
+        console.log("Department:", employee.department);
+        console.log("Salary:", employee.salary);
+        console.log(" ------------- ");
+         });
+}
+function calculateTotalSalary(employeeList) {
+        let totalSalary = 0;
+        employeeList.forEach(function(employee) {
+                totalSalary += employee.salary;
+        });
+        console.log("Total Salary =", totalSalary);
+}
+displayEmployee(employees);
+calculateTotalSalary(employees);</code></pre>
+                                </div>
+                                <p>2. Output:-</p>
+                            </div>
+                        </div>
+
+                        <!-- Important Methods -->
+                        <div class="bg-[#2d2d2d] p-4 rounded-md border border-[#404040] mt-6">
+                            <h3 class="text-[#dcb67a] font-semibold text-[16px] mb-4 border-b border-[#404040] pb-2">Important Methods / Functions</h3>
+                            <div class="ml-5 text-[#cccccc] space-y-4">
+                                <div><p class="font-semibold text-white">1. function</p><p class="ml-5 text-sm">Used to create a reusable block of JavaScript code.</p></div>
+                                <div><p class="font-semibold text-white">2. console.log( )</p><p class="ml-5 text-sm">Used to display output in the console.</p></div>
+                                <div><p class="font-semibold text-white">3. map( )</p><p class="ml-5 text-sm">Creates a new array by applying a function to every element.</p></div>
+                                <div><p class="font-semibold text-white">4. filter( )</p><p class="ml-5 text-sm">Creates a new array containing elements that satisfy a condition.</p></div>
+                                <div><p class="font-semibold text-white">5. reduce( )</p><p class="ml-5 text-sm">Reduces an array to a single value.</p></div>
+                                <div><p class="font-semibold text-white">6. Arrow Function =&gt;</p><p class="ml-5 text-sm">Provides a shorter syntax for writing functions.</p></div>
+                                <div><p class="font-semibold text-white">7. Object Property Access</p><p class="ml-5 text-sm">Object.property<br>Used to access a property of an object.</p></div>
+                                <div><p class="font-semibold text-white">8. return</p><p class="ml-5 text-sm">Returns a value from a function.</p></div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            },
+            'mern-m1-aim3': {
+                filename: 'Aim3.jsx',
+                breadcrumb: 'MERN > Module 1 > Aim 3',
+                title: '<span class="text-[#007acc]">Aim 3:</span> React Introduction and JSX.',
+                description: `
+                    <div class="space-y-4">
+                        <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2 mt-6">a) Create a React application using Vite/CRA and display "Welcome to MERN Stack Development".</h3>
+                        <p class="text-[#cccccc] mb-2"><strong>Requirements:</strong></p>
+                        <ul class="list-disc ml-8 mb-3 text-[#cccccc] space-y-1">
+                        <li>Visual Studio Code</li>
+                        <li>Node.js and npm</li>
+                        <li>React</li>
+                        <li>Vite</li>
+                        <li>Web Browser</li>
+                        </ul>
+                        <p class="text-white font-semibold mb-2"><strong>Steps:</strong></p>
+                        <p class="text-[#cccccc] mb-2">1. Open Command Prompt / VS Code Terminal</p>
+                        <p class="text-[#cccccc] mb-2">2. Run command:</p>
+                        <div class="code-container relative my-4">
+                        <button class="copy-btn absolute top-2 right-2 px-2 py-1 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] rounded text-[11px] font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                        <pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>npm create vite@latest my-app</code></pre>
+                        </div>
+                        <p class="text-[#cccccc] mb-2">Select Framework – react<br>
+                        Select Variant – JavaScript<br>
+                        Which linear to use? – ESLint<br>
+                        Install with npm and start now? – Yes</p>
+                        <p class="text-[#cccccc] mb-2">3. Open this folder in VS Code</p>
+                        <p class="text-[#cccccc] mb-2">4. Go to src folder -&gt; Open App.jsx</p>
+                        <p class="text-[#cccccc] mb-2">Delete all existing code and write this:</p>
+                        <div class="code-container relative my-4">
+                        <button class="copy-btn absolute top-2 right-2 px-2 py-1 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] rounded text-[11px] font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                        <pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>import React from "react";
+import "./App.css";
+
+function App()
+{
+    return(
+        &lt;div className="container"&gt;
+         &lt;h1&gt;Welcome to MERN Stack Development&lt;/h1&gt;
+        &lt;/div&gt;
+    )
+}
+
+export default App;</code></pre>
+                        </div>
+                        <p class="text-[#cccccc] mb-2">5. Open App.css</p>
+                        <p class="text-[#cccccc] mb-2">Delete all existing code and write this:</p>
+                        <div class="code-container relative my-4">
+                        <button class="copy-btn absolute top-2 right-2 px-2 py-1 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] rounded text-[11px] font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                        <pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>.container{
+    text-align: center;
+    margin-top: 50 px;
+}
+
+h1{
+    color: red;
+}</code></pre>
+                        </div>
+                        <p class="text-[#cccccc] mb-2">6. Run in the Terminal:</p>
+                        <div class="code-container relative my-4">
+                        <button class="copy-btn absolute top-2 right-2 px-2 py-1 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] rounded text-[11px] font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                        <pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>npm run dev</code></pre>
+                        </div>
+                        <p class="text-[#cccccc] mb-2">Open link http://localhost:5174 in Browser.</p>
+                        <p class="text-[#cccccc] mb-4">7. Output</p>
+
+                        <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2 mt-6">b) Display dynamic data using JSX.</h3>
+                        <p class="text-[#cccccc] mb-2">In src/App.jsx</p>
+                        <div class="code-container relative my-4">
+                        <button class="copy-btn absolute top-2 right-2 px-2 py-1 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] rounded text-[11px] font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                        <pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>import React from "react";
+import "./App.css";
+
+function App()
+{
+    const student_name="Vaishnavi";
+    const rollno=101;
+    const course="T.Y.BSc IT";
+    const subject="React JS";
+    const marks=90;
+
+    return(
+     &lt;div className="container"&gt;
+         &lt;h1&gt;Display Dynamic Data Using JSX&lt;/h1&gt;
+         &lt;h2&gt;Student Information&lt;/h2&gt;
+         &lt;p&gt;&lt;b&gt;Name:&lt;/b&gt;{student_name}&lt;/p&gt;
+         &lt;p&gt;&lt;b&gt;Roll no:&lt;/b&gt;{rollno}&lt;/p&gt;
+         &lt;p&gt;&lt;b&gt;Course:&lt;/b&gt;{course}&lt;/p&gt;
+         &lt;p&gt;&lt;b&gt;Subject:&lt;/b&gt;{subject}&lt;/p&gt;
+         &lt;p&gt;&lt;b&gt;Marks:&lt;/b&gt;{marks}&lt;/p&gt;
+         &lt;h3&gt;Status:{marks&gt;=35? "Pass":"Fail"}&lt;/h3&gt;
+     &lt;/div&gt;
+    );
+}
+
+export default App;</code></pre>
+                        </div>
+                        <p class="text-[#cccccc] mb-2">In src/App.css</p>
+                        <div class="code-container relative my-4">
+                        <button class="copy-btn absolute top-2 right-2 px-2 py-1 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] rounded text-[11px] font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                        <pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>.container{
+    width: 450 px;
+    margin: 50 px auto;
+    background: white;
+    padding: 20 px;
+    border-radius: 10 px;
+    box-shadow: 0 0 10 px gray;
+}
+
+h1{
+    color: blue;
+    text-align: center;
+}
+
+h2{
+    color: green;
+}</code></pre>
+                        </div>
+                        <p class="text-[#cccccc] mb-4">Output:</p>
+
+                        <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2 mt-6">c) Write a program to declare variables and write a function to calculate sum of 2 numbers and display results.</h3>
+                        <p class="text-[#cccccc] mb-2">In src/App.jsx</p>
+                        <div class="code-container relative my-4">
+                        <button class="copy-btn absolute top-2 right-2 px-2 py-1 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] rounded text-[11px] font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                        <pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>import React from "react";
+import "./App.css";
+
+function App()
+{
+    const num1=20;
+    const num2=30;
+    
+    function calculateSum(a,b){
+        return a+b;
+    }
+    
+    return(
+        &lt;div&gt;
+         &lt;h1&gt;React-Sum of two numbers&lt;/h1&gt;
+         &lt;p&gt;First Number:{num1}&lt;/p&gt;
+         &lt;p&gt;Second Number:{num2}&lt;/p&gt;
+         &lt;h2&gt;Sum={calculateSum(num1,num2)}&lt;/h2&gt;
+        &lt;/div&gt;
+    );
+}
+export default App;</code></pre>
+                        </div>
+                        <p class="text-[#cccccc] mb-2">In src/App.css</p>
+                        <div class="code-container relative my-4">
+                        <button class="copy-btn absolute top-2 right-2 px-2 py-1 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] rounded text-[11px] font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                        <pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>div{
+    text-align: center;
+    margin-top: 50 px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+h1{
+    color: blue;
+}
+h2{
+    color: green;
+}</code></pre>
+                        </div>
+                        <p class="text-[#cccccc] mb-4">Output:</p>
+
+                        <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2 mt-6">d) Apply Basic css styling to React Component.</h3>
+                        <p class="text-[#cccccc] mb-2">In src/App.jsx</p>
+                        <div class="code-container relative my-4">
+                        <button class="copy-btn absolute top-2 right-2 px-2 py-1 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] rounded text-[11px] font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                        <pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>import React from "react";
+import "./App.css";
+
+function App()
+{
+    return(
+     &lt;div className="container"&gt;
+         &lt;h1&gt;Welcome to React Js&lt;/h1&gt;
+         &lt;p&gt;This component is styled using Css&lt;/p&gt;
+         &lt;button&gt;Click Me&lt;/button&gt;
+     &lt;/div&gt;
+    );
+}
+
+export default App;</code></pre>
+                        </div>
+                        <p class="text-[#cccccc] mb-2">In src/App.css</p>
+                        <div class="code-container relative my-4">
+                        <button class="copy-btn absolute top-2 right-2 px-2 py-1 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] rounded text-[11px] font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                        <pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>.container{
+    text-align: center;
+    margin-top: 50 px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+h1{
+    color: blue;
+}
+
+p{
+    color: green;
+}
+
+button{
+    background-color: blue;
+    color: white;
+    padding: 10 px, 20 px;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover{
+    background-color: blue;
+}</code></pre>
+                        </div>
+                        <p class="text-[#cccccc] mb-4">Output:</p>
+
+                        <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2 mt-6">e) Create a simple functional component and render in App.jsx.</h3>
+                        <p class="text-[#cccccc] mb-2">1. Create Page Components</p>
+                        <p class="text-[#cccccc] mb-2">Inside the Src folder, create a folder.<br>Inside it, create:<br>Student.jsx</p>
+                        <p class="text-[#cccccc] mb-2">In src/Student.jsx</p>
+                        <div class="code-container relative my-4">
+                        <button class="copy-btn absolute top-2 right-2 px-2 py-1 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] rounded text-[11px] font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                        <pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>import React from "react";
+function Student(){
+     return(
+          &lt;div&gt;
+            &lt;h2&gt;Student Component&lt;/h2&gt;
+            &lt;p&gt;Name:Vaishnavi&lt;/p&gt;
+            &lt;p&gt;Class:T.Y.IT&lt;/p&gt;
+          &lt;/div&gt;
+     );
+}
+export default Student;</code></pre>
+                        </div>
+                        <p class="text-[#cccccc] mb-2">In src/App.jsx</p>
+                        <div class="code-container relative my-4">
+                        <button class="copy-btn absolute top-2 right-2 px-2 py-1 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] rounded text-[11px] font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                        <pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>import React from "react";
+import Student from "./Student";
+function App()
+{
+    return(
+     &lt;div className="container"&gt;
+      &lt;h1&gt;Simple Functional Component&lt;/h1&gt;
+      &lt;Student/&gt;
+     &lt;/div&gt;
+    );
+}
+export default App;</code></pre>
+                        </div>
+                        <p class="text-[#cccccc] mb-4">Output:</p>
+
+                        <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2 mt-6">f) Create a React component that display current Date and Time Dynamically using JavaScript.</h3>
+                        <p class="text-[#cccccc] mb-2">1. Create Page Components</p>
+                        <p class="text-[#cccccc] mb-2">Inside the Src folder, create a folder.<br>Inside it, create:<br>DateTime.jsx</p>
+                        <p class="text-[#cccccc] mb-2">In src/ DateTime.jsx</p>
+                        <div class="code-container relative my-4">
+                        <button class="copy-btn absolute top-2 right-2 px-2 py-1 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] rounded text-[11px] font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                        <pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>import React, {useState, useEffect} from "react";
+function Datetime(){
+    const [datetime, setDatetime] = useState(new Date());
+    
+    useEffect(() =&gt; {
+         const timer = setInterval(() =&gt; {
+           setDatetime(new Date());
+         }, 1000);
+         return () =&gt; clearInterval(timer);
+    }, []);
+    
+    return (
+         &lt;div style={{ textAlign: "center", marginTop: "20px" }}&gt;
+           &lt;h2&gt;Current Date and Time&lt;/h2&gt;
+           &lt;h3&gt;Date:{datetime.toLocaleDateString()}&lt;/h3&gt;
+           &lt;h3&gt;Time: {datetime.toLocaleTimeString()}&lt;/h3&gt;
+         &lt;/div&gt;
+    );
+}
+export default Datetime;</code></pre>
+                        </div>
+                        <p class="text-[#cccccc] mb-2">In src/ App.jsx</p>
+                        <div class="code-container relative my-4">
+                        <button class="copy-btn absolute top-2 right-2 px-2 py-1 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] rounded text-[11px] font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                        <pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>import React from "react";
+import Datetime from "./DateTime";
+
+function App(){
+    return(
+     &lt;div&gt;
+         &lt;Datetime/&gt;
+     &lt;/div&gt;
+    );
+}
+export default App;</code></pre>
+                        </div>
+                        
+                        <!-- Important Methods -->
+                        <div class="bg-[#2d2d2d] p-4 rounded-md border border-[#404040] mt-6">
+                            <h3 class="text-[#dcb67a] font-semibold text-[16px] mb-4 border-b border-[#404040] pb-2">Important Methods / Functions</h3>
+                            <ul class="list-none ml-2 text-[#cccccc] space-y-3">
+                            <li><span class="text-white font-semibold">1. function App( )</span><br><span class="text-sm">Used to Create a reusable Functional Component in React.</span></li>
+                            <li><span class="text-white font-semibold">2. return( )</span><br><span class="text-sm">Used to return JSX, which is the HTML-like code to be displayed on screen.</span></li>
+                            <li><span class="text-white font-semibold">3. export default</span><br><span class="text-sm">Used to export a component so it can be imported and used in other files.</span></li>
+                            <li><span class="text-white font-semibold">4. JSX Expression</span><br><span class="text-sm">Used to embed and display JavaScript variables and expressions inside JSX.</span></li>
+                            <li><span class="text-white font-semibold">5. import</span><br><span class="text-sm">Used to import CSS files and other components into the current file.</span></li>
+                            <li><span class="text-white font-semibold">6. style =</span><br><span class="text-sm">Used to apply inline CSS styling to JSX elements in React.</span></li>
+                            <li><span class="text-white font-semibold">7. className</span><br><span class="text-sm">Used to apply CSS classes from an external CSS file.</span></li>
+                            <li><span class="text-white font-semibold">8. function call – calculateSum( )</span><br><span class="text-sm">Used to create a reusable block of code and call it inside JSX to get a result.</span></li>
+                            <li><span class="text-white font-semibold">9. new Date ( )</span><br><span class="text-sm">Used to create an object that contains the current date and time.</span></li>
+                            <li><span class="text-white font-semibold">10. toLocaleDateString( )</span><br><span class="text-sm">Used to display the current date in a readable string format.</span></li>
+                            <li><span class="text-white font-semibold">11. toLocaleTimeString( )</span><br><span class="text-sm">Used to display the current time in a readable string format.</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                `
+            },
+            'mern-m1-aim4': {
+                filename: 'Aim4.jsx',
+                breadcrumb: 'MERN > Module 1 > Aim 4',
+                title: '<span class="text-[#007acc]">Aim 4:</span> React Components, Props, and State',
+                description: `
+                <div class="mb-6 space-y-6">
+                    <div>
+                        <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">a) Create a multiple components and render them on a single page.</h3>
+                        <p class="text-[#cccccc] font-semibold mb-1">Requirements:</p>
+                        <ul class="list-disc list-inside text-[#cccccc] mb-4 ml-4">
+                            <li>VS Code</li>
+                            <li>Node.js</li>
+                            <li>React + Vite</li>
+                        </ul>
+                        <p class="text-[#cccccc] mb-2">1. Create a new React project using</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>npm create vite@latest practical-4 ----- template react</code></pre>
+                        </div>
+                        <p class="text-[#cccccc] mb-2">2. Go inside folder:</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>cd practical-4</code></pre>
+                        </div>
+                        <p class="text-[#cccccc] mb-2">3. install dependencies:</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>npm install</code></pre>
+                        </div>
+
+                        <p class="text-[#4ec9b0] mt-4 mb-2">In src/Header.jsx</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>function Header(){
+  return(
+     &lt;div&gt;
+        &lt;h1&gt;MERN Practical&lt;/h1&gt;
+        &lt;hr/&gt;
+      &lt;/div&gt;
+  );
+}
+export default Header;</code></pre>
+                        </div>
+
+                        <p class="text-[#4ec9b0] mt-4 mb-2">In src/Student.jsx</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>function Student(props){
+  return(
+     &lt;div&gt;
+        &lt;h3&gt;Student Information&lt;/h3&gt;
+        &lt;p&gt;Name:{props.name}&lt;/p&gt;
+        &lt;p&gt;Class:{props.className}&lt;/p&gt;
+        &lt;p&gt;Roll No:{props.rollno}&lt;/p&gt;
+        &lt;hr/&gt;
+     &lt;/div&gt;
+  );
+}
+export default Student;</code></pre>
+                        </div>
+
+                        <p class="text-[#4ec9b0] mt-4 mb-2">In src/Footer.jsx</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>function Footer(){
+    return(
+         &lt;div&gt;
+            &lt;h4&gt;BNN College, Bhiwandi&lt;/h4&gt;
+            &lt;p&gt;React Practical&lt;/p&gt;
+          &lt;/div&gt;
+    );
+}
+export default Footer;</code></pre>
+                        </div>
+
+                        <p class="text-[#4ec9b0] mt-4 mb-2">In src/Counter.jsx</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>import { useState } from "react";
+
+function Counter(){
+    const [count,setCount]=useState(0);
+    return(
+         &lt;div&gt;
+            &lt;h3&gt;Counter using State&lt;/h3&gt;
+            &lt;h2&gt;{count}&lt;/h2&gt;
+            &lt;button onClick={()=&gt;setCount(count+1)}&gt;+&lt;/button&gt;
+            &lt;button onClick={()=&gt;setCount(count-1)}&gt;-&lt;/button&gt;
+            &lt;hr/&gt;
+          &lt;/div&gt;
+     );
+}
+export default Counter;</code></pre>
+                        </div>
+
+                        <p class="text-[#4ec9b0] mt-4 mb-2">In src/App.jsx</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>import Header from "./Header";
+import Student from "./Student";
+import Counter from "./Counter";
+import Footer from "./Footer";
+
+function App(){
+    return(
+     &lt;div style={{textAlign:"center"}}&gt;
+          &lt;Header/&gt;
+          &lt;Student name="Vaishnavi" className="TYIT" rollno="50"/&gt;
+          &lt;Counter/&gt;
+          &lt;Footer/&gt;
+     &lt;/div&gt;
+    );
+}
+export default App;</code></pre>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">b) Pass the data between components using Props.</h3>
+                        <p class="text-[#4ec9b0] mt-4 mb-2">In src/App.jsx</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>import React from "react";
+import Employee from "./Employee";
+
+function App(){
+    return(
+     &lt;div&gt;
+          &lt;Employee name="Vaishnavi" department="IT" salary={50000}/&gt;
+      &lt;/div&gt;
+    );
+}
+export default App;</code></pre>
+                        </div>
+
+                        <p class="text-[#4ec9b0] mt-4 mb-2">In src/Employee.jsx</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>function Employee(props){
+     return(
+          &lt;div&gt;
+             &lt;h2&gt;Employee Details&lt;/h2&gt;
+             &lt;p&gt;Name:{props.name}&lt;/p&gt;
+             &lt;p&gt;Department:{props.department}&lt;/p&gt;
+             &lt;p&gt;Salary:{props.salary}&lt;/p&gt;
+          &lt;/div&gt;
+     );
+}
+export default Employee;</code></pre>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">c) Use the useState hook to manage and update data.</h3>
+                        <p class="text-[#cccccc] mb-2">(Hook :- It is a special function that allows you to use react features such as state and lifecycle)</p>
+                        <p class="text-[#cccccc] mb-2"><strong>useState:-</strong> Built-in react features that lets you to add local state to functional components.</p>
+                        <p class="text-[#cccccc] mb-4">It returns and array with the current state value and setter function to update that value and trigger a component re-render.</p>
+                        <p class="text-[#4ec9b0] mt-4 mb-2">In src/App.jsx</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>import React, { useState } from "react";
+
+function App(){
+const[name,setName]=useState("Vaishnavi");
+
+const updateName=()=&gt;{
+  setName("Hello");
+ };
+
+ return(
+  &lt;div&gt;
+       &lt;h2&gt;useState hook Example&lt;/h2&gt;
+       &lt;h3&gt;{name}&lt;/h3&gt;
+       &lt;button onClick={updateName}&gt;Update data&lt;/button&gt;
+   &lt;/div&gt;
+ );
+}
+export default App;</code></pre>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">d) Display the list of items stored in the state using map( ).</h3>
+                        <p class="text-[#cccccc] mb-4"><strong>map( ):-</strong> Map function is used to Dynamically loop through an array and render a list of JSX elements.</p>
+                        <p class="text-[#4ec9b0] mt-4 mb-2">In src/App.jsx</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>import React from "react";
+function App() {
+  const employees = [
+       { id: 1, name: "Vaishnavi", dept: "IT" },
+       { id: 2, name: "Sneha", dept: "CS" },
+       { id: 3, name: "Veer", dept: "CS" },
+       { id: 4, name: "Geeta", dept: "HR" }
+  ];
+  return (
+       &lt;div&gt;
+            &lt;h2&gt;Employee details&lt;/h2&gt;
+            &lt;table border="1" cellPadding="10"&gt;
+              &lt;thead&gt;
+                  &lt;tr&gt;
+                       &lt;th&gt;ID&lt;/th&gt;
+                       &lt;th&gt;Name&lt;/th&gt;
+                       &lt;th&gt;Dept&lt;/th&gt;
+                  &lt;/tr&gt;
+              &lt;/thead&gt;
+              &lt;tbody&gt;
+                  {
+                       employees.map((employee) =&gt; (
+                            &lt;tr key={employee.id}&gt;
+                              &lt;td&gt;{employee.id}&lt;/td&gt;
+                              &lt;td&gt;{employee.name}&lt;/td&gt;
+                              &lt;td&gt;{employee.dept}&lt;/td&gt;
+                           &lt;/tr&gt;
+                      ))
+                  }
+              &lt;/tbody&gt;
+            &lt;/table&gt;
+          &lt;/div&gt;
+    );
+}
+export default App;</code></pre>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">e) Create a form component to accept user input and display it dynamically.</h3>
+                        <p class="text-[#4ec9b0] mt-4 mb-2">In src/App.jsx</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>import { useState } from "react";
+
+function App() {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [course, setCourse] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e) =&gt; {
+       e.preventDefault();
+       setSubmitted(true);
+  };
+
+  return (
+       &lt;div&gt;
+          &lt;h2&gt;User Registration Form&lt;/h2&gt;
+          &lt;form onSubmit={handleSubmit}&gt;
+              &lt;label&gt;Name:&lt;/label&gt;
+              &lt;input type="text" value={name} onChange={(e) =&gt; setName(e.target.value)} /&gt;
+              &lt;br /&gt;&lt;br /&gt;
+              &lt;label&gt;Email:&lt;/label&gt;
+              &lt;input type="email" value={email} onChange={(e) =&gt; setEmail(e.target.value)} /&gt;
+              &lt;br /&gt;&lt;br /&gt;
+              &lt;label&gt;Course:&lt;/label&gt;
+              &lt;input type="text" value={course} onChange={(e) =&gt; setCourse(e.target.value)} /&gt;
+              &lt;br /&gt;&lt;br /&gt;
+              &lt;button type="submit"&gt;Submit&lt;/button&gt;
+        &lt;/form&gt;
+        {submitted && (
+         &lt;div&gt;
+               &lt;h3&gt;Entered Details&lt;/h3&gt;
+               &lt;p&gt;Name: {name}&lt;/p&gt;
+               &lt;p&gt;Email: {email}&lt;/p&gt;
+               &lt;p&gt;Course: {course}&lt;/p&gt;
+         &lt;/div&gt;
+        )}
+      &lt;/div&gt;
+    );
+}
+export default App;</code></pre>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">f) Build a small interactive component (Eg., Counter or ToDo list).</h3>
+                        <p class="text-[#4ec9b0] mt-4 mb-2">In src/App.jsx</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>import { useState } from "react";
+
+function App() {
+  const [task, setTask] = useState("");
+  const [tasks, setTasks] = useState([]);
+
+  const addTask = () =&gt; {
+       if (task.trim() === "") {
+              alert("Please enter a task");
+              return;
+       }
+       setTasks([
+              ...tasks,
+             { id: Date.now(), name: task, completed: false }
+       ]);
+       setTask("");
+  };
+
+  const deleteTask = (id) =&gt; {
+       setTasks(tasks.filter((item) =&gt; item.id !== id));
+  };
+
+  const completeTask = (id) =&gt; {
+       setTasks(
+             tasks.map((item) =&gt;
+                  item.id === id ? { ...item, completed: !item.completed } : item
+             )
+       );
+  };
+
+  return (
+       &lt;div&gt;
+             &lt;h2&gt;My To-Do List&lt;/h2&gt;
+             &lt;input
+                  type="text"
+                  placeholder="Enter a task"
+                  value={task}
+                  onChange={(e) =&gt; setTask(e.target.value)}
+            /&gt;
+             &lt;button onClick={addTask}&gt;Add Task&lt;/button&gt;
+             &lt;h3&gt;Tasks&lt;/h3&gt;
+             {tasks.length === 0 ? (
+                  &lt;p&gt;No task added yet&lt;/p&gt;
+            ):(
+                 &lt;ul&gt;
+                    {tasks.map((item) =&gt; (
+                         &lt;li key={item.id}&gt;
+                          &lt;span
+                               onClick={() =&gt; completeTask(item.id)}
+                               style={{
+                                    textDecoration: item.completed ? "line-through" : "none",
+                                    cursor: "pointer"
+                              }}
+                          &gt;
+                               {item.name}
+                           &lt;/span&gt;
+                           &lt;button onClick={() =&gt; deleteTask(item.id)}&gt;Delete&lt;/button&gt;
+                         &lt;/li&gt;
+                    ))}
+                 &lt;/ul&gt;
+            )}
+       &lt;/div&gt;
+  );
+}
+export default App;</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="bg-[#2d2d2d] p-4 rounded-md border border-[#404040] mt-6">
+                        <h3 class="text-[#dcb67a] font-semibold text-[16px] mb-4 border-b border-[#404040] pb-2">Important Methods / Functions</h3>
+                        <ul class="list-none ml-2 text-[#cccccc] space-y-3">
+                            <li><span class="text-white font-semibold">1. function App()</span><br><span class="text-sm">Used to create a reusable Functional Component in React.</span></li>
+                            <li><span class="text-white font-semibold">2. return()</span><br><span class="text-sm">Used to return JSX, which is the HTML-like code to be displayed on screen.</span></li>
+                            <li><span class="text-white font-semibold">3. useState()</span><br><span class="text-sm">Used to create and manage state in a functional component.</span></li>
+                            <li><span class="text-white font-semibold">4. props</span><br><span class="text-sm">Used to pass data from parent component to child component.</span></li>
+                            <li><span class="text-white font-semibold">5. setCount() / setName()</span><br><span class="text-sm">Used to update the state value and re-render the component.</span></li>
+                            <li><span class="text-white font-semibold">6. onClick={ }</span><br><span class="text-sm">Used to handle click events on buttons and other elements.</span></li>
+                            <li><span class="text-white font-semibold">7. onChange={ }</span><br><span class="text-sm">Used to handle input field changes and accept user input.</span></li>
+                            <li><span class="text-white font-semibold">8. map()</span><br><span class="text-sm">Used to display a list of items stored in state or array.</span></li>
+                            <li><span class="text-white font-semibold">9. export default</span><br><span class="text-sm">Used to export a component so it can be imported.</span></li>
+                        </ul>
+                    </div>
+                </div>
+                `
+            },
+            'mern-m1-aim5': {
+                filename: 'Aim5.jsx',
+                breadcrumb: 'MERN > Module 1 > Aim 5',
+                title: '<span class="text-[#007acc]">Aim 5:</span> React Routing & Data Handling.',
+                description: `
+                <div class="mb-6 space-y-6">
+                    <div>
+                        <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">a) Install and configure React Router in the React application.</h3>
+                        <p class="text-[#cccccc] font-semibold mb-1">Requirements:</p>
+                        <ul class="list-disc list-inside text-[#cccccc] mb-4 ml-4">
+                            <li>VS Code</li>
+                            <li>Node.js</li>
+                            <li>React application created using vite</li>
+                        </ul>
+                        <p class="text-[#cccccc] mb-2 font-semibold">Steps</p>
+                        <p class="text-[#cccccc] mb-1">1. Open VS Code</p>
+                        <p class="text-[#cccccc] mb-1">2. Open Terminal → New Terminal.</p>
+                        <p class="text-[#cccccc] mb-1">3. Type this commands in Terminal.</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>i. npm create vite@latest react-routing
+ii. npm install react-router-dom@6</code></pre>
+                        </div>
+
+                        <p class="text-[#4ec9b0] mt-4 mb-2">In src/App.jsx</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>import React from "react";
+import {
+ BrowserRouter as Router,
+ Routes,
+ Route,
+ Link
+} from "react-router-dom";
+
+function Home() {
+ return (
+  &lt;div&gt;
+    &lt;h2&gt;Home Page&lt;/h2&gt;
+  &lt;/div&gt;
+    );
+}
+
+function About() {
+    return (
+     &lt;div&gt;
+         &lt;h2&gt;About Page&lt;/h2&gt;
+         &lt;ul&gt;
+          &lt;li&gt;
+           &lt;Link to="/team"&gt;Our Team&lt;/Link&gt;
+          &lt;/li&gt;
+          &lt;li&gt;
+           &lt;Link to="/company"&gt;Our Company&lt;/Link&gt;
+          &lt;/li&gt;
+         &lt;/ul&gt;
+     &lt;/div&gt;
+    );
+}
+
+function Team() {
+    return &lt;h2&gt;Team Page&lt;/h2&gt;;
+}
+
+function Company() {
+    return &lt;h2&gt;Company Page&lt;/h2&gt;;
+}
+
+function Contact() {
+    return &lt;h2&gt;Contact Page&lt;/h2&gt;;
+}
+
+function App() {
+    return (
+     &lt;Router&gt;
+         &lt;nav&gt;
+          &lt;ul&gt;
+           &lt;li&gt;
+            &lt;Link to="/"&gt;Home&lt;/Link&gt;
+           &lt;/li&gt;
+           &lt;li&gt;
+            &lt;Link to="/about"&gt;About&lt;/Link&gt;
+           &lt;/li&gt;
+           &lt;li&gt;
+            &lt;Link to="/contact"&gt;Contact&lt;/Link&gt;
+           &lt;/li&gt;
+          &lt;/ul&gt;
+         &lt;/nav&gt;
+         &lt;Routes&gt;
+          &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+          &lt;Route path="/about" element={&lt;About /&gt;} /&gt;
+          &lt;Route path="/team" element={&lt;Team /&gt;} /&gt;
+          &lt;Route path="/company" element={&lt;Company /&gt;} /&gt;
+          &lt;Route path="/contact" element={&lt;Contact /&gt;} /&gt;
+         &lt;/Routes&gt;
+     &lt;/Router&gt;
+    );
+}
+export default App;</code></pre>
+                        </div>
+
+                        <p class="text-[#4ec9b0] mt-4 mb-2">In src/index.css</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>body {
+     font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+h1 {
+    text-align: center;
+    color: red;
+}
+nav ul {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+}
+nav li {
+    margin: 0 10px;
+}
+nav a {
+    text-decoration: none;
+    color: #333;
+}
+button {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+button:hover {
+    background-color: blue;
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">b) Create a multiple pages an implement and navigation between them.</h3>
+                        
+                        <p class="text-[#4ec9b0] mt-4 mb-2">In src/Home.jsx</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>function Home() {
+    return (
+         &lt;div&gt;
+           &lt;h2&gt;Welcome to Sunrise Public School&lt;/h2&gt;
+           &lt;p&gt;
+               Welcome to Sunrise public school we provide
+               quality education to students
+           &lt;/p&gt;
+           &lt;h3&gt;School News&lt;/h3&gt;
+           &lt;p&gt;
+               Admissions are open for the academic year
+               2026-2027
+           &lt;/p&gt;
+         &lt;/div&gt;
+    );
+}
+export default Home;</code></pre>
+                        </div>
+
+                        <p class="text-[#4ec9b0] mt-4 mb-2">In src/About.jsx</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>function About() {
+    return (
+         &lt;div&gt;
+           &lt;h2&gt;About Our School&lt;/h2&gt;
+           &lt;p&gt;
+               Sunrise public school was established in 1995.
+               Our school provides education from primary to
+               secondary level.
+           &lt;/p&gt;
+           &lt;p&gt;
+               Welcome, we focus on academics, sports, cultural
+               activities and overall development of students.
+           &lt;/p&gt;
+         &lt;/div&gt;
+    );
+}
+export default About;</code></pre>
+                        </div>
+
+                        <p class="text-[#4ec9b0] mt-4 mb-2">In src/Classes.jsx</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>function Classes() {
+    return (
+         &lt;div&gt;
+           &lt;h2&gt;Classes&lt;/h2&gt;
+           &lt;ul&gt;
+               &lt;li&gt;Class 1&lt;/li&gt;
+               &lt;li&gt;Class 2&lt;/li&gt;
+               &lt;li&gt;Class 3&lt;/li&gt;
+               &lt;li&gt;Class 4&lt;/li&gt;
+           &lt;/ul&gt;
+         &lt;/div&gt;
+    );
+}
+export default Classes;</code></pre>
+                        </div>
+
+                        <p class="text-[#4ec9b0] mt-4 mb-2">In src/Teachers.jsx</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>function Teachers() {
+    return (
+         &lt;div&gt;
+           &lt;h2&gt;Our Teachers&lt;/h2&gt;
+           &lt;table border="1"&gt;
+               &lt;thead&gt;
+            &lt;tr&gt;
+              &lt;th&gt;Teacher Name&lt;/th&gt;
+              &lt;th&gt;Subject&lt;/th&gt;
+              &lt;th&gt;Class&lt;/th&gt;
+            &lt;/tr&gt;
+         &lt;/thead&gt;
+         &lt;tbody&gt;
+            &lt;tr&gt;
+              &lt;td&gt;ABC&lt;/td&gt;
+              &lt;td&gt;Maths&lt;/td&gt;
+              &lt;td&gt;9th&lt;/td&gt;
+            &lt;/tr&gt;
+            &lt;tr&gt;
+              &lt;td&gt;DDR&lt;/td&gt;
+              &lt;td&gt;Science&lt;/td&gt;
+              &lt;td&gt;9th&lt;/td&gt;
+            &lt;/tr&gt;
+                  &lt;tr&gt;
+                    &lt;td&gt;XYZ&lt;/td&gt;
+                    &lt;td&gt;English&lt;/td&gt;
+                    &lt;td&gt;10th&lt;/td&gt;
+                  &lt;/tr&gt;
+               &lt;/tbody&gt;
+           &lt;/table&gt;
+         &lt;/div&gt;
+    );
+}
+export default Teachers;</code></pre>
+                        </div>
+
+                        <p class="text-[#4ec9b0] mt-4 mb-2">In src/Contact.jsx</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>function Contact() {
+    return (
+         &lt;div&gt;
+           &lt;h2&gt;Contact Us&lt;/h2&gt;
+           &lt;p&gt;
+               &lt;b&gt;School:&lt;/b&gt; Sunrise Public School
+           &lt;/p&gt;
+           &lt;p&gt;
+              &lt;b&gt;Address:&lt;/b&gt; Mumbai, Maharashtra
+           &lt;/p&gt;
+           &lt;p&gt;
+              &lt;b&gt;Email:&lt;/b&gt; Sunrise@gmail.com
+           &lt;/p&gt;
+           &lt;p&gt;
+              &lt;b&gt;Phone:&lt;/b&gt; 987654321
+           &lt;/p&gt;
+         &lt;/div&gt;
+    );
+}
+export default Contact;</code></pre>
+                        </div>
+
+                        <p class="text-[#4ec9b0] mt-4 mb-2">In src/App.jsx</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>import React from "react";
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route,
+    Link
+}
+from "react-router-dom";
+import Home from "./Home";
+import About from "./About";
+import Classes from "./Classes";
+import Teachers from "./Teachers";
+import Contact from "./Contact";
+
+function App() {
+    return (
+      &lt;Router&gt;
+           &lt;nav&gt;
+               &lt;Link to="/"&gt;Home&lt;/Link&gt;{" "}
+               &lt;Link to="/about"&gt;About&lt;/Link&gt;{" "}
+               &lt;Link to="/classes"&gt;Classes&lt;/Link&gt;{" "}
+               &lt;Link to="/teachers"&gt;Teachers&lt;/Link&gt;{" "}
+               &lt;Link to="/contact"&gt;Contact&lt;/Link&gt;{" "}
+           &lt;/nav&gt;
+           &lt;Routes&gt;
+             &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+             &lt;Route path="/about" element={&lt;About /&gt;} /&gt;
+             &lt;Route path="/classes" element={&lt;Classes /&gt;} /&gt;
+             &lt;Route path="/teachers" element={&lt;Teachers /&gt;} /&gt;
+             &lt;Route path="/contact" element={&lt;Contact /&gt;} /&gt;
+           &lt;/Routes&gt;
+         &lt;/Router&gt;
+    );
+}
+export default App;</code></pre>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">c) Use Link and Routes to move between pages.</h3>
+                        <p class="text-[#4ec9b0] mt-4 mb-2">In src/Services.jsx</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>function Services()
+{
+    return (
+         &lt;div&gt;
+           &lt;h2&gt;Our Services&lt;/h2&gt;
+           &lt;ul&gt;
+               &lt;li&gt;Web Application Development&lt;/li&gt;
+               &lt;li&gt;Database Management&lt;/li&gt;
+                &lt;li&gt;API Development&lt;/li&gt;
+           &lt;/ul&gt;
+         &lt;/div&gt;
+    );
+}
+export default Services;</code></pre>
+                        </div>
+
+                        <p class="text-[#4ec9b0] mt-4 mb-2">In src/Contact.jsx</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>function Contact()
+{
+    return (
+         &lt;div&gt;
+           &lt;h2&gt;Contact Us&lt;/h2&gt;
+            &lt;p&gt;Email: support@example.com&lt;/p&gt;
+            &lt;p&gt;Phone: 9876543210&lt;/p&gt;
+         &lt;/div&gt;
+    );
+}
+export default Contact;</code></pre>
+                        </div>
+
+                        <p class="text-[#4ec9b0] mt-4 mb-2">In src/App.jsx</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>import { Routes, Route, Link } from "react-router-dom";
+import Services from "./Services.jsx";
+import Contact from "./Contact.jsx";
+
+    function App()
+    {
+     return (
+         &lt;div&gt;
+         &lt;h1&gt;MERN Service Portal&lt;/h1&gt;
+         &lt;nav&gt;
+          &lt;Link to="/"&gt;Home&lt;/Link&gt; |{" "}
+          &lt;Link to="/services"&gt;Services&lt;/Link&gt; |{" "}
+          &lt;Link to="/contact"&gt;Contact&lt;/Link&gt;
+         &lt;/nav&gt;
+         &lt;hr /&gt;
+          &lt;Routes&gt;
+           &lt;Route path="/" element={&lt;h2&gt;Welcome to Our Website&lt;/h2&gt;} /&gt;
+           &lt;Route path="/services" element={&lt;Services /&gt;} /&gt;
+           &lt;Route path="/contact" element={&lt;Contact /&gt;} /&gt;
+          &lt;/Routes&gt;
+     &lt;/div&gt;
+    );
+}
+export default App;</code></pre>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">d) Fetch data from public API using Axios.</h3>
+                        <p class="text-[#cccccc] mb-2"><strong>Axios:-</strong> Axios is a popular promised based Http client for JavaScript. It is commonly used to make API request in browser and node.js.</p>
+                        <p class="text-[#cccccc] mb-2">To install the Axios we used the command:</p>
+                        <ul class="list-disc list-inside text-[#cccccc] mb-4 ml-4">
+                            <li>npm install axios</li>
+                            <li>npm start</li>
+                        </ul>
+                        <p class="text-[#4ec9b0] mt-4 mb-2">In src/App.jsx</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>import React, { useEffect, useState } from "react";
+import axios from "axios";
+
+function App() {
+  const [products, setProducts] = useState([]);
+  
+  useEffect(() =&gt; {
+     axios.get("https://dummyjson.com/products")
+        .then((response) =&gt; {
+             setProducts(response.data.products);
+        })
+        .catch((error) =&gt; {
+             console.log(error);
+        });
+  }, []);
+
+  return (
+     &lt;div&gt;
+        &lt;h1&gt;Product Details&lt;/h1&gt;
+        &lt;table border="1" cellPadding="10"&gt;
+             &lt;thead&gt;
+               &lt;tr&gt;
+                  &lt;th&gt;ID&lt;/th&gt;
+                  &lt;th&gt;Product Name&lt;/th&gt;
+                    &lt;th&gt;Price&lt;/th&gt;
+                    &lt;th&gt;Category&lt;/th&gt;
+                    &lt;th&gt;Rating&lt;/th&gt;
+                  &lt;/tr&gt;
+             &lt;/thead&gt;
+             &lt;tbody&gt;
+                  {products.map((product) =&gt; (
+                    &lt;tr key={product.id}&gt;
+                          &lt;td&gt;{product.id}&lt;/td&gt;
+                          &lt;td&gt;{product.title}&lt;/td&gt;
+                          &lt;td&gt;{product.price}&lt;/td&gt;
+                          &lt;td&gt;{product.category}&lt;/td&gt;
+                          &lt;td&gt;{product.rating}&lt;/td&gt;
+                    &lt;/tr&gt;
+                  ))}
+             &lt;/tbody&gt;
+           &lt;/table&gt;
+         &lt;/div&gt;
+    );
+}
+export default App;</code></pre>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">e) Display fetched data in table or list format.</h3>
+                        <p class="text-[#4ec9b0] mt-4 mb-2">In src/App.jsx</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>import { useEffect, useState } from "react";
+import axios from "axios";
+import "./App.css";
+
+function App() {
+ const [users, setUsers] = useState([]);
+
+ useEffect(() =&gt; {
+  axios
+    .get("https://jsonplaceholder.typicode.com/users")
+    .then((response) =&gt; {
+     setUsers(response.data);
+    })
+    .catch((error) =&gt; {
+     console.error("Unable to retrieve users:", error);
+    });
+ }, []);
+
+ return (
+  &lt;div className="container"&gt;
+    &lt;h1&gt;User Information&lt;/h1&gt;
+    &lt;table&gt;
+     &lt;thead&gt;
+         &lt;tr&gt;
+           &lt;th&gt;ID&lt;/th&gt;
+           &lt;th&gt;Name&lt;/th&gt;
+           &lt;th&gt;Username&lt;/th&gt;
+            &lt;th&gt;Email&lt;/th&gt;
+            &lt;th&gt;City&lt;/th&gt;
+           &lt;/tr&gt;
+          &lt;/thead&gt;
+          &lt;tbody&gt;
+           {users.map((user) =&gt; (
+            &lt;tr key={user.id}&gt;
+             &lt;td&gt;{user.id}&lt;/td&gt;
+             &lt;td&gt;{user.name}&lt;/td&gt;
+             &lt;td&gt;{user.username}&lt;/td&gt;
+             &lt;td&gt;{user.email}&lt;/td&gt;
+             &lt;td&gt;{user.address.city}&lt;/td&gt;
+            &lt;/tr&gt;
+           ))}
+          &lt;/tbody&gt;
+         &lt;/table&gt;
+     &lt;/div&gt;
+    );
+}
+export default App;</code></pre>
+                        </div>
+
+                        <p class="text-[#4ec9b0] mt-4 mb-2">In src/App.css</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>.container {
+    width: 90%;
+    margin: 30px auto;
+    text-align: center;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th,
+td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+}
+th {
+    background-color: lightgray;
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">f) Implement search or filter functionality on displayed data.</h3>
+                        <p class="text-[#4ec9b0] mt-4 mb-2">In src/App.jsx</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>import { useEffect, useState } from "react";
+import axios from "axios";
+import "./App.css";
+
+function App() {
+ const [users, setUsers] = useState([]);
+ const [searchText, setSearchText] = useState("");
+
+ useEffect(() =&gt; {
+  axios
+      .get("https://jsonplaceholder.typicode.com/users")
+      .then((response) =&gt; {
+       setUsers(response.data);
+      })
+      .catch((error) =&gt; {
+       console.error("Unable to retrieve users:", error);
+      });
+ }, []);
+
+ const filteredUsers = users.filter((user) =&gt;
+  user.name.toLowerCase().includes(searchText.toLowerCase())
+ );
+
+ return (
+  &lt;div className="container"&gt;
+      &lt;h1&gt;Search User&lt;/h1&gt;
+      &lt;input
+          placeholder="Enter user name"
+          value={searchText}
+          onChange={(event) =&gt; setSearchText(event.target.value)}
+         /&gt;
+         &lt;table&gt;
+          &lt;thead&gt;
+              &lt;tr&gt;
+               &lt;th&gt;Name&lt;/th&gt;
+               &lt;th&gt;Email&lt;/th&gt;
+               &lt;th&gt;City&lt;/th&gt;
+              &lt;/tr&gt;
+          &lt;/thead&gt;
+          &lt;tbody&gt;
+              {filteredUsers.map((user) =&gt; (
+               &lt;tr key={user.id}&gt;
+                &lt;td&gt;{user.name}&lt;/td&gt;
+                &lt;td&gt;{user.email}&lt;/td&gt;
+                &lt;td&gt;{user.address.city}&lt;/td&gt;
+               &lt;/tr&gt;
+              ))}
+          &lt;/tbody&gt;
+         &lt;/table&gt;
+     &lt;/div&gt;
+    );
+}
+export default App;</code></pre>
+                        </div>
+
+                        <p class="text-[#4ec9b0] mt-4 mb-2">In src/App.css</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>.container {
+    width: 85%;
+    margin: 30px auto;
+    text-align: center;
+}
+input {
+    width: 300px;
+    padding: 10px;
+    margin-bottom: 20px;
+    font-size: 16px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th,
+td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: left;
+}
+th {
+    background-color: lightgray;
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+                `
+            },
+            'mern-m2-aim6': {
+                filename: 'Aim6_server.js',
+                breadcrumb: 'MERN > Module 2 > Aim 6',
+                title: '<span class="text-[#007acc]">Aim 6:</span> Node.js and Express Fundamentals',
+                description: `
+                <div class="mb-6 space-y-6">
+                    <!-- Section A -->
+                    <div>
+                        <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">a. Install Express and create a simple server.</h3>
+                        <p class="text-white font-semibold mb-2">Procedure</p>
+                        <p class="text-[#cccccc] mb-3">Since this is the first Express practical, the initial project setup and Express installation will be explained step by step.</p>
+                        
+                        <div class="ml-5 text-[#cccccc] space-y-3">
+                            <div>
+                                <p class="font-semibold text-white">1: Create the Practical Folder</p>
+                                <p>Inside the MERN Practicals folder, create a new folder named: <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">Practical-1</code>. Open this folder in Visual Studio Code.</p>
+                            </div>
+
+                            <div>
+                                <p class="font-semibold text-white">2: Open the Integrated Terminal</p>
+                                <p>Select: Terminal -&gt; New Terminal</p>
+                                <p>The terminal should display a path similar to:</p>
+                                <div class="code-container relative group mb-2 mt-2">
+                                    <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                    <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>PS D:\\MERN_Practicals\\Practical-6&gt;</code></pre>
+                                </div>
+                            </div>
+
+                            <div>
+                                <p class="font-semibold text-white">3: Initialize the Node.js Project</p>
+                                <p>Execute the init command in the terminal.</p>
+                                <p>This command creates a <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">package.json</code> file containing the basic information and dependencies of the Node.js project.</p>
+                            </div>
+
+                            <div>
+                                <p class="font-semibold text-white">4: Install Express.js</p>
+                                <p>Execute the install command for Express:</p>
+                                <div class="code-container relative group mb-2 mt-2">
+                                    <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                    <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>npm install express</code></pre>
+                                </div>
+                                <p>After successful installation, Express will be added to the project dependencies.</p>
+                            </div>
+
+                            <div>
+                                <p class="font-semibold text-white">5: Create the Server File</p>
+                                <p>Create a new file named: <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">server.js</code></p>
+                                <p>The project structure will appear similar to:</p>
+                                <div class="code-container relative group mb-2 mt-2">
+                                    <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                    <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>Practical-6
+    node_modules
+    package-lock.json
+    package.json
+    server.js</code></pre>
+                                </div>
+                            </div>
+
+                            <div>
+                                <p class="font-semibold text-white">6: Write the Express Server Program</p>
+                                <p>Open <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">server.js</code> and enter the server program.</p>
+                                <div class="code-container relative group mb-2 mt-2">
+                                    <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                    <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>const express = require("express");
+const app = express();
+const PORT = 3000;
+app.get("/", (req, res) =&gt; {
+ res.send("Welcome to MERN Stack Backend Development");
+});
+app.listen(PORT, () =&gt; {
+ console.log(\`Server running on port \${PORT}\`);
+});</code></pre>
+                                </div>
+                            </div>
+
+                            <div>
+                                <p class="font-semibold text-white">7: Run the Server</p>
+                                <p>Save the file and execute the file using node.</p>
+                                <div class="code-container relative group mb-2 mt-2">
+                                    <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                    <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>Node server.js</code></pre>
+                                </div>
+                                <p>The terminal displays: Server is running on port 3000.</p>
+                            </div>
+
+                            <div>
+                                <p class="font-semibold text-white">8: Open the Application in the Browser</p>
+                                <p>Open the following address in the browser:</p>
+                                <div class="code-container relative group mb-2 mt-2">
+                                    <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                    <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>http://localhost:3000</code></pre>
+                                </div>
+                                <p>The browser displays the response sent by the Express server.</p>
+                                <p class="mt-2 font-semibold text-white">Output:</p>
+                                <p class="text-[#858585]">Practical 6 — Express server output screenshots</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Section B -->
+                    <div>
+                        <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">b. Create Multiple Routes in Express</h3>
+                        <p class="text-white font-semibold mb-1">Procedure:</p>
+                        <p class="text-[#cccccc] mb-2">Create multiple routes like <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">/</code>, <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">/about</code>, <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">/courses</code>, <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">/contact</code> in <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">server.js</code>.</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>const express = require("express");
+const app = express();
+
+const PORT = 3000;
+app.get("/", (req, res) =&gt; {
+   res.send("Welcome to the Home Page");
+});
+app.get("/about", (req, res) =&gt; {
+  res.send("About MERN Stack Development");
+});
+app.get("/courses", (req, res) =&gt; {
+ res.send("Course: B.Sc. Information Technology");
+});
+
+app.get("/contact", (req, res) =&gt; {
+ res.send("Contact: mern@example.com");
+});
+
+app.listen(PORT, () =&gt; {
+console.log(\`Server running on port \${PORT}\`);
+});</code></pre>
+                        </div>
+                        <p class="text-[#cccccc] mb-2">Run the server.</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>Node server.js</code></pre>
+                        </div>
+                        <p class="text-[#cccccc] mb-2">Open the URLs individually in the browser to see output.</p>
+                        <p class="text-[#cccccc]"><strong>Output:</strong> The screenshots above show the Home, About, Courses and Contact routes.</p>
+                    </div>
+
+                    <!-- Section C -->
+                    <div>
+                        <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">c. Send HTML Content from Express Server</h3>
+                        <p class="text-white font-semibold mb-1">Procedure:</p>
+                        <p class="text-[#cccccc] mb-2">Create a route that sends HTML content in <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">server.js</code>.</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>const express = require("express");
+const app = express();
+
+const PORT = 3000;
+app.get("/", (req, res) =&gt; {
+res.send(\`
+      &lt;h1&gt;MERN Stack Development&lt;/h1&gt;
+      &lt;h2&gt;Backend Using Express.js&lt;/h2&gt;
+      &lt;p&gt;Welcome to the Express server&lt;/p&gt;
+      &lt;p&gt;Course: B.Sc. Information Technology&lt;/p&gt;
+      &lt;p&gt;Semester: V&lt;/p&gt;
+ \`);
+
+});
+app.listen(PORT, () =&gt; {
+      console.log(\`Server running on port \${PORT}\`);
+});</code></pre>
+                        </div>
+                        <p class="text-[#cccccc] mb-2">Open localhost:3000.</p>
+                        <p class="text-[#cccccc]"><strong>Output:</strong> The page displays MERN Stack Development, Backend Using Express.js, course information and semester.</p>
+                    </div>
+
+                    <!-- Section D -->
+                    <div>
+                        <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">d. Handle Route Parameters in Express</h3>
+                        <p class="text-[#4ec9b0] mt-2 mb-2">In server.js</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>const express = require("express");
+const app = express();
+const PORT = 3000;
+
+app.get("/student/:name/:rollno", (req, res) =&gt; {
+      const studentName = req.params.name;
+      const rollNo = req.params.rollno;
+      res.send(\`
+       &lt;h1&gt;Student Information&lt;/h1&gt;
+       &lt;p&gt;Name: \${studentName}&lt;/p&gt;
+       &lt;p&gt;Roll Number: \${rollNo}&lt;/p&gt;
+\`);
+});
+app.listen(PORT, () =&gt; {
+       console.log(\`Server running on port \${PORT}\`);
+});</code></pre>
+                        </div>
+                        <p class="text-[#cccccc]"><strong>Output:</strong> The screenshot above shows student information obtained through the URL parameters.</p>
+                    </div>
+
+                    <!-- Section E -->
+                    <div>
+                        <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">e. Handle Query Parameters in Express</h3>
+                        <p class="text-[#4ec9b0] mt-2 mb-2">In server.js</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>const express = require("express");
+const app = express();
+const PORT = 3000;
+
+app.get("/student", (req, res) =&gt; {
+       const name = req.query.name;
+       const course = req.query.course;
+       res.send(\`
+        &lt;h1&gt;Student Details&lt;/h1&gt;
+        &lt;p&gt;Name: \${name}&lt;/p&gt;
+        &lt;p&gt;Course: \${course}&lt;/p&gt;
+       \`);
+});
+app.listen(PORT, () =&gt; {
+      console.log(\`Server running on port \${PORT}\`);
+});</code></pre>
+                        </div>
+                        <p class="text-[#cccccc] mb-1">Output URL:</p>
+                        <div class="code-container relative group mb-2 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>http://localhost:3000/student?name=Siya&amp;course=BScIT</code></pre>
+                        </div>
+                        <p class="text-[#cccccc]">The browser displays the name <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">Siya</code> and course <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">BScIT</code>.</p>
+                    </div>
+
+                    <!-- Section F -->
+                    <div>
+                        <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">f. Create a Simple JSON API using Express</h3>
+                        <p class="text-[#4ec9b0] mt-2 mb-2">In server.js</p>
+                        <div class="code-container relative group mb-4 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>const express = require("express");
+const app = express();
+const PORT = 3000;
+
+const students = [
+     { id: 1, name: "Amit", course: "B.Sc. IT", semester: 5 },
+     { id: 2, name: "Priya", course: "B.Sc. IT", semester: 5 },
+     { id: 3, name: "Neha", course: "B.Sc. IT", semester: 5 }
+];
+app.get("/api/students", (req, res) =&gt; {
+      res.json(students);
+});
+app.listen(PORT, () =&gt; {
+console.log(\`Server running on port \${PORT}\`);
+});</code></pre>
+                        </div>
+                        <p class="text-[#cccccc] mb-1">Output URL:</p>
+                        <div class="code-container relative group mb-2 mt-2">
+                            <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                            <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>http://localhost:3000/api/students</code></pre>
+                        </div>
+                        <p class="text-[#cccccc]">The browser displays the student records in JSON format.</p>
+                    </div>
+                </div>
+                `
+            },
+            'mern-m2-aim7': {
+                filename: 'Aim7_MongoDB.js',
+                breadcrumb: 'MERN > Module 2 > Aim 7',
+                title: '<span class="text-[#007acc]">Aim 7:</span> Install MongoDB Community Server and MongoDB Compass',
+                description: `<div class="mb-6 space-y-4"><p class="text-[#cccccc] mb-2">Aim 7: Install MongoDB Community Server and MongoDB Compass.</p><p class="text-[#cccccc] mb-2">MongoDB is a NoSQL, document-oriented database used in MERN Stack.</p><p class="text-[#cccccc] mb-2">Unlike SQL databases where data is stored in tables and rows, MongoDB stores data in collections and documents.</p><h3 class="text-[#569cd6] font-semibold text-[16px] mb-2 mt-6">a. Download MongoDB Community Server</h3><p class="text-[#cccccc] mb-2">Download MongoDB Community Server from:</p><p class="text-[#cccccc] mb-2"><code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">https\://www.mongodb.com/try/download/community</code></p><p class="text-[#cccccc] mb-2">Choose Complete installation.</p><p class="text-[#cccccc] mb-2">Install MongoDB Compass.</p><p class="text-[#cccccc] mb-2">Click Finish.</p><p class="text-[#cccccc] mb-2">Open MongoDB Compass and launch MongoDB Compass.</p><p class="text-[#cccccc] mb-2">The default connection string appears as:</p><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+mongodb://localhost:27017
+</code></pre><p class="text-[#cccccc] mb-2">Click Save &amp; Connect.</p><h3 class="text-[#569cd6] font-semibold text-[16px] mb-2 mt-6">Create a Database</h3><p class="text-[#cccccc] mb-2">Click Create Database.</p><p class="text-[#cccccc] mb-2">Enter:</p><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+Database Name = studentDB
+
+Collection Name = students
+</code></pre><p class="text-[#cccccc] mb-2">Click Create Database.</p><p class="text-[#cccccc] mb-2">Output: The <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">studentDB</code> database and <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">students</code> collection are created in MongoDB Compass.</p><h3 class="text-[#569cd6] font-semibold text-[16px] mb-2 mt-6">b. Perform CRUD operations using MongoDB Compass.</h3><p class="text-[#cccccc] mb-2">Program / Operations</p><p class="text-[#cccccc] mb-2">Insert the following document into the <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">students</code> collection.</p><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+{
+
+&quot;studentId&quot;: 101,
+
+&quot;name&quot;: &quot;Rahul Sharma&quot;,
+
+&quot;course&quot;: &quot;M.Sc. Information Technology&quot;,
+
+&quot;semester&quot;: 3,
+
+&quot;city&quot;: &quot;Delhi&quot;
+
+}
+</code></pre><p class="text-[#cccccc] mb-2">Perform the following operations:</p><ol class="list-decimal ml-8 space-y-1"><li>Insert a document</li></ol><ol class="list-decimal ml-8 space-y-1"><li>View documents</li></ol><ol class="list-decimal ml-8 space-y-1"><li>Update the city field</li></ol><ol class="list-decimal ml-8 space-y-1"><li>Delete the document</li></ol><p class="text-[#cccccc] mb-2">Output:</p><p class="text-[#cccccc] mb-2">Practical 7 — MongoDB Compass and CRUD output screenshots</p><h3 class="text-[#569cd6] font-semibold text-[16px] mb-2 mt-6">c. Connect Node.js with MongoDB using Mongoose.</h3><p class="text-[#cccccc] mb-2">Create a folder named <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">MONGO</code>.</p><p class="text-[#cccccc] mb-2">Open the integrated terminal.</p><p class="text-[#cccccc] mb-2">Bash</p><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+&gt; Cd MONGO
+
+&gt;npm init –y
+
+&gt;npm install mongoose
+</code></pre><p class="text-[#cccccc] mb-2">Create a file inside the MONGO folder named <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">server.js</code>.</p><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+const mongoose = require(&quot;mongoose&quot;);
+
+mongoose
+
+ .connect(&quot;mongodb://127.0.0.1:27017/studentDB&quot;)
+
+ .then(() =&gt; {
+
+  console.log(&quot;MongoDB Connected Successfully&quot;);
+
+ })
+
+ .catch((error) =&gt; {
+
+  console.log(error);
+
+ });
+</code></pre><p class="text-[#cccccc] mb-2">Run:</p><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+Node server.js
+</code></pre><p class="text-[#cccccc] mb-2">Output: MongoDB Connected Successfully</p></div>`
+            },
+            'mern-m2-aim8': {
+                filename: 'Aim8_API.js',
+                breadcrumb: 'MERN > Module 2 > Aim 8',
+                title: '<span class="text-[#007acc]">Aim 8:</span> API Creation and Integration',
+                description: `<div class="mb-6 space-y-4"><p class="text-[#cccccc] mb-2">Aim 8: API Creation and Integration</p><h3 class="text-[#569cd6] font-semibold text-[16px] mb-2 mt-6">a. Create a MongoDB Scheme and model using Mongoose.</h3><p class="text-[#cccccc] mb-2">Procedure</p><ol class="list-decimal ml-8 space-y-1"><li>Open the Practical-3 folder in Visual Studio Code.</li></ol><ol class="list-decimal ml-8 space-y-1"><li>Open the integrated terminal and initialize the project.</li></ol><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+npm init –y
+</code></pre><ol class="list-decimal ml-8 space-y-1"><li>Install the required packages.</li></ol><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+npm install express mongoose
+</code></pre><ol class="list-decimal ml-8 space-y-1"><li>Create a file named \`Server.js\`.</li></ol><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+const express = require(&quot;express&quot;);
+
+const mongoose = require(&quot;mongoose&quot;);
+
+const app = express();
+
+app.use(express.json());
+
+mongoose
+
+ .connect(&quot;mongodb://127.0.0.1:27017/studentDB&quot;)
+
+ .then(() =&gt; console.log(&quot;MongoDB Connected Successfully&quot;))
+
+ .catch((err) =&gt; console.log(err));
+
+const studentSchema = new mongoose.Schema({
+
+ name: String,
+
+ course: String,
+
+ semester: Number,
+
+ city: String,
+
+});
+
+
+
+const Student = mongoose.model(&quot;Student&quot;, studentSchema);
+
+app.listen(3000, () =&gt; {
+
+ console.log(&quot;Server Running on Port 3000&quot;);
+
+
+
+});
+</code></pre><p class="text-[#cccccc] mb-2">Run:</p><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+&gt;node server.js
+</code></pre><h3 class="text-[#569cd6] font-semibold text-[16px] mb-2 mt-6">b. Implement REST API Operations.</h3><p class="text-[#cccccc] mb-2">In <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">server.js</code></p><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+const express = require(&quot;express&quot;);
+
+const mongoose = require(&quot;mongoose&quot;);
+
+const app = express();
+
+app.use(express.json());
+
+mongoose
+
+ .connect(&quot;mongodb://127.0.0.1:27017/studentDB&quot;)
+
+ .then(() =&gt; console.log(&quot;MongoDB Connected Successfully&quot;))
+
+ .catch((err) =&gt; console.log(err));
+
+const studentSchema = new mongoose.Schema({
+
+ name: String,
+
+ course: String,
+
+ semester: Number,
+
+ city: String,
+
+});
+
+const Student = mongoose.model(&quot;Student&quot;, studentSchema);
+
+// POST
+
+app.post(&quot;/students&quot;, async (req, res) =&gt; {
+
+ const student = new Student(req.body);
+
+ await student.save();
+
+ res.json(student);
+
+});
+
+// GET
+
+app.get(&quot;/students&quot;, async (req, res) =&gt; {
+
+ const students = await Student.find();
+
+ res.json(students);
+
+});
+
+// PUT
+
+app.put(&quot;/students/:id&quot;, async (req, res) =&gt; {
+
+ const student = await Student.findByIdAndUpdate(req.params.id, req.body, {
+
+  new: true,
+
+ });
+
+ res.json(student);
+
+});
+
+// DELETE
+
+app.delete(&quot;/students/:id&quot;, async (req, res) =&gt; {
+
+ await Student.findByIdAndDelete(req.params.id);
+
+ res.json({
+
+  message: &quot;Student Deleted Successfully&quot;,
+
+ });
+
+});
+
+app.listen(3000, () =&gt; {
+
+ console.log(&quot;Server Running on Port 3000&quot;);
+
+});
+</code></pre><p class="text-[#cccccc] mb-2">Output:</p><p class="text-[#cccccc] mb-2">Execute:</p><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+node server.js
+</code></pre><h3 class="text-[#569cd6] font-semibold text-[16px] mb-2 mt-6">c. Test REST APIs Using Postman.</h3><p class="text-[#cccccc] mb-2">Procedure</p><h3 class="text-[#569cd6] font-semibold text-[16px] mb-2 mt-6">Install Postman</h3><ol class="list-decimal ml-8 space-y-1"><li>Open your web browser and visit:</li></ol><p class="text-[#cccccc] mb-2"><code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">postman.com</code></p><p class="text-[#cccccc] mb-2"><code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">https\://www.postman.com/downloads/</code></p><ol class="list-decimal ml-8 space-y-1"><li>Download the Windows 64-bit version.</li></ol><ol class="list-decimal ml-8 space-y-1"><li>Run the downloaded installer.</li></ol><ol class="list-decimal ml-8 space-y-1"><li>Follow the installation wizard and click Install.</li></ol><ol class="list-decimal ml-8 space-y-1"><li>After installation, open Postman.</li></ol><h3 class="text-[#569cd6] font-semibold text-[16px] mb-2 mt-6">Skip Login (Recommended for Students)</h3><p class="text-[#cccccc] mb-2">When Postman opens, it may ask you to sign in.</p><p class="text-[#cccccc] mb-2">Choose one of these options:</p><p class="text-[#cccccc] mb-2">- Skip and go to the app</p><p class="text-[#cccccc] mb-2">- Continue without an account (Depending on the version, the wording may differ.)</p><h3 class="text-[#569cd6] font-semibold text-[16px] mb-2 mt-6">Create Your First Request</h3><ol class="list-decimal ml-8 space-y-1"><li>Click New or the + tab.</li></ol><ol class="list-decimal ml-8 space-y-1"><li>Select HTTP Request.</li></ol><ol class="list-decimal ml-8 space-y-1"><li>At the top, change the request method to GET.</li></ol><ol class="list-decimal ml-8 space-y-1"><li>Enter the URL:</li></ol><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+localhost:3000
+</code></pre><ol class="list-decimal ml-8 space-y-1"><li>Click Send.</li></ol><p class="text-[#cccccc] mb-2">If your Express server is running, you will see the response from your API.</p><h3 class="text-[#569cd6] font-semibold text-[16px] mb-2 mt-6">Test POST Request</h3><ol class="list-decimal ml-8 space-y-1"><li>Change the method to POST.</li></ol><ol class="list-decimal ml-8 space-y-1"><li>Enter the URL: \`localhost:3000/students\`</li></ol><ol class="list-decimal ml-8 space-y-1"><li>Click Body.</li></ol><ol class="list-decimal ml-8 space-y-1"><li>Select raw.</li></ol><ol class="list-decimal ml-8 space-y-1"><li>From the dropdown, choose JSON.</li></ol><p class="text-[#cccccc] mb-2">Enter:</p><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+{
+
+    &quot;name&quot;: &quot;Rahul Sharma&quot;,
+
+
+
+    &quot;course&quot;: &quot;B.Sc. Information Technology&quot;,
+
+    &quot;semester&quot;: 5,
+
+    &quot;city&quot;: &quot;Mumbai&quot;
+
+
+
+}
+</code></pre><p class="text-[#cccccc] mb-2">Click Send.</p><p class="text-[#cccccc] mb-2">If successful, the inserted document will be displayed in the response.</p><h3 class="text-[#569cd6] font-semibold text-[16px] mb-2 mt-6">Open Postman and test the following requests</h3><table class="w-full border-collapse text-sm my-3"><tbody><tr><td class="border border-[#444] p-2">Method</td><td class="border border-[#444] p-2">URL</td></tr></tbody></table><table class="w-full border-collapse text-sm my-3"><tbody><tr><td class="border border-[#444] p-2">GET</td><td class="border border-[#444] p-2">\`http\://localhost:3000/students\`</td></tr></tbody></table><table class="w-full border-collapse text-sm my-3"><tbody><tr><td class="border border-[#444] p-2">PUT</td><td class="border border-[#444] p-2">\`http\://localhost:3000/students/:id\`</td></tr></tbody></table><table class="w-full border-collapse text-sm my-3"><tbody><tr><td class="border border-[#444] p-2">DELETE</td><td class="border border-[#444] p-2">\`http\://localhost:3000/students/:id\`</td></tr></tbody></table><p class="text-[#cccccc] mb-2">Output</p><p class="text-[#cccccc] mb-2">Perform the following operations in Postman:</p><ol class="list-decimal ml-8 space-y-1"><li>Insert a student record.</li></ol><ol class="list-decimal ml-8 space-y-1"><li>Retrieve all student records.</li></ol><ol class="list-decimal ml-8 space-y-1"><li>Update a student record.</li></ol><ol class="list-decimal ml-8 space-y-1"><li>Delete a student record.</li></ol></div>`
+            },
+            'mern-m2-aim9': {
+                filename: 'Aim9_React_Axios.jsx',
+                breadcrumb: 'MERN > Module 2 > Aim 9',
+                title: '<span class="text-[#007acc]">Aim 9:</span> Frontend and Backend Integration using React and Axios',
+                description: `<div class="mb-6 space-y-4"><p class="text-[#cccccc] mb-2">Aim 9: Frontend and Backend Integration using React and Axios.</p><p class="text-[#cccccc] mb-2">Axios is used to send HTTP requests from React to the Express API. The backend also requires CORS middleware so that the React application running on one port can communicate with the Express server running on another port. (npm)</p><h3 class="text-[#569cd6] font-semibold text-[16px] mb-2 mt-6">a. Create the React Frontend and connect it with Express.</h3><p class="text-[#cccccc] mb-2">To create a React application and connect it to the Express backend using Axios.</p><p class="text-[#cccccc] mb-2">Procedure</p><h3 class="text-[#569cd6] font-semibold text-[16px] mb-2 mt-6">1: Keep the Backend Server Ready</h3><p class="text-[#cccccc] mb-2">Open the existing <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">Practical_7</code> folder in one VS Code window.</p><p class="text-[#cccccc] mb-2">Make sure the backend <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">server.js</code> contains the CRUD API developed in Practical 7.</p><p class="text-[#cccccc] mb-2">Install CORS in the backend folder:</p><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+npm install cors
+</code></pre><p class="text-[#cccccc] mb-2">Add this line near the top of <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">server.js</code>:</p><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+const cors = require(&quot;cors&quot;);
+</code></pre><p class="text-[#cccccc] mb-2">Add the following middleware after creating the Express application:</p><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+app.use(cors());
+
+app.use(express.json());
+</code></pre><p class="text-[#cccccc] mb-2">The beginning of the backend file should appear as follows:</p><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+const express = require(&quot;express&quot;);
+
+const mongoose = require(&quot;mongoose&quot;);
+
+const cors=require(&quot;cors&quot;);
+
+const app = express();
+
+
+
+
+
+app.use(cors())
+
+app.use(express.json());
+
+mongoose
+
+ .connect(&quot;mongodb://127.0.0.1:27017/studentDB&quot;)
+
+ .then(() =&gt; console.log(&quot;MongoDB Connected Successfully&quot;))
+
+ .catch((err) =&gt; console.log(err));
+
+const studentSchema = new mongoose.Schema({
+
+ name: String,
+
+ course: String,
+
+ semester: Number,
+
+ city: String,
+
+});
+
+const Student = mongoose.model(&quot;Student&quot;, studentSchema);
+
+app.listen(3000, () =&gt; {
+
+ console.log(&quot;Server Running on Port 3000&quot;);
+
+});
+</code></pre><p class="text-[#cccccc] mb-2">Run the Backend:</p><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+node server.js
+</code></pre><h3 class="text-[#569cd6] font-semibold text-[16px] mb-2 mt-6">2. Create the React Application</h3><p class="text-[#cccccc] mb-2">Open another VS Code window.</p><p class="text-[#cccccc] mb-2">Create a folder named: <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">Practical-9</code></p><p class="text-[#cccccc] mb-2">Open the terminal and execute:</p><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+npm create vite@latest
+</code></pre><p class="text-[#cccccc] mb-2">Enter the project name: <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">student-frontend</code></p><p class="text-[#cccccc] mb-2">Select:</p><p class="text-[#cccccc] mb-2">Framework: React</p><p class="text-[#cccccc] mb-2">Variant: JavaScript</p><p class="text-[#cccccc] mb-2">Then execute:</p><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+cd student-frontend
+
+npm install
+</code></pre><p class="text-[#cccccc] mb-2">Vite provides a quick way to create a React project using a React template. (vitejs)</p><h3 class="text-[#569cd6] font-semibold text-[16px] mb-2 mt-6">3. Install Axios</h3><p class="text-[#cccccc] mb-2">Inside the <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">student-frontend</code> folder, run:</p><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+npm install axios
+</code></pre><p class="text-[#cccccc] mb-2">Axios is a promise-based HTTP client used to send requests such as GET, POST, PUT, and DELETE. (npm)</p><h3 class="text-[#569cd6] font-semibold text-[16px] mb-2 mt-6">4: Start the React Application</h3><p class="text-[#cccccc] mb-2">Execute:</p><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+npm run dev
+</code></pre><p class="text-[#cccccc] mb-2">Open the displayed local URL: <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">http\://localhost:51734/</code></p><h3 class="text-[#569cd6] font-semibold text-[16px] mb-2 mt-6">B. Retrieve and Display Student Records.</h3><p class="text-[#cccccc] mb-2">To retrieve student records from the Express backend and display them in a React application.</p><p class="text-[#cccccc] mb-2">In <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">App.jsx</code></p><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+import { useEffect, useState } from &quot;react&quot;;
+
+import axios from &quot;axios&quot;;
+
+import &quot;./App.css&quot;;
+
+function App() {
+
+ const [students, setStudents] = useState([]);
+
+ const fetchStudents = async () =&gt; {
+
+  try {
+
+      const response = await axios.get(&quot;http\://localhost:3000/students&quot;);
+
+      setStudents(response.data);
+
+  } catch (error) {
+
+      console.error(&quot;Error fetching students:&quot;, error);
+
+  }
+
+ };
+
+ useEffect(() =&gt; {
+
+  fetchStudents();
+
+ }, []);
+
+ return (
+
+  \&lt;div className=&quot;container&quot;&gt;
+
+      \&lt;h1&gt;Student Management System\&lt;/h1&gt;
+
+      \&lt;h2&gt;Student Records Retrieved from Backend\&lt;/h2&gt;
+
+      \&lt;table&gt;
+
+       \&lt;thead&gt;
+
+        \&lt;tr&gt;
+
+           \&lt;th&gt;Name\&lt;/th&gt;
+
+            \&lt;th&gt;Course\&lt;/th&gt;
+
+            \&lt;th&gt;Semester\&lt;/th&gt;
+
+            \&lt;th&gt;City\&lt;/th&gt;
+
+           \&lt;/tr&gt;
+
+          \&lt;/thead&gt;
+
+          \&lt;tbody&gt;
+
+           {students.map((student) =&gt; (
+
+            \&lt;tr key={student.\_id}&gt;
+
+             \&lt;td&gt;{student.name}\&lt;/td&gt;
+
+             \&lt;td&gt;{student.course}\&lt;/td&gt;
+
+             \&lt;td&gt;{student.semester}\&lt;/td&gt;
+
+             \&lt;td&gt;{student.city}\&lt;/td&gt;
+
+            \&lt;/tr&gt;
+
+           ))}
+
+          \&lt;/tbody&gt;
+
+         \&lt;/table&gt;
+
+     \&lt;/div&gt;
+
+    );
+
+}
+
+export default App;
+</code></pre><p class="text-[#cccccc] mb-2">In App.css</p><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+body {
+
+    font-family: Arial, sans-serif;
+
+    background-color: #f4f4f4;
+
+    margin: 0;
+
+}
+
+.container {
+
+    width: 80%;
+
+    margin: 40px auto;
+
+    background-color: white;
+
+    padding: 25px;
+
+    border-radius: 8px;
+
+}
+
+h1 {
+
+    text-align: center;
+
+}
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+    margin-top: 20px;
+
+}
+
+th,
+
+td {
+
+    border: 1px solid #cccccc;
+
+    padding: 12px;
+
+    text-align: left;
+
+}
+
+th {
+
+
+
+    background-color: #eeeeee;
+
+}
+</code></pre><h3 class="text-[#569cd6] font-semibold text-[16px] mb-2 mt-6">C. Add, Update and Delete Student Records.</h3><p class="text-[#cccccc] mb-2">In <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">src/app.jsx</code></p><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+import { useEffect, useState } from &quot;react&quot;;
+
+import axios from &quot;axios&quot;;
+
+import &quot;./App.css&quot;;
+
+
+
+function App() {
+
+ const [students, setStudents] = useState([]);
+
+ const [formData, setFormData] = useState({
+
+ name: &quot;&quot;,
+
+  course: &quot;&quot;,
+
+  semester: &quot;&quot;,
+
+  city: &quot;&quot;,
+
+ });
+
+ const [editingId, setEditingId] = useState(null);
+
+ const [message, setMessage] = useState(&quot;&quot;);
+
+ const apiUrl = &quot;http\://localhost:3000/students&quot;;
+
+ const fetchStudents = async () =&gt; {
+
+  try {
+
+      const response = await axios.get(apiUrl);
+
+      setStudents(response.data);
+
+  } catch (error) {
+
+      console.error(&quot;Error fetching students:&quot;, error);
+
+  }
+
+ };
+
+ useEffect(() =&gt; {
+
+  fetchStudents();
+
+ }, []);
+
+ const handleChange = (event) =&gt; {
+
+  setFormData({ ...formData, [event.target.name]: event.target.value });
+
+ };
+
+ const handleSubmit = async (event) =&gt; {
+
+  event.preventDefault();
+
+  try {
+
+      if (editingId) {
+
+          await axios.put(\`\${apiUrl}/\${editingId}\`, formData);
+
+          setEditingId(null);
+
+          setMessage(&quot;Student updated successfully!&quot;);
+
+      } else {
+
+
+
+          await axios.post(apiUrl, formData);
+
+          setMessage(&quot;Student added successfully!&quot;);
+
+      }
+
+
+
+      setFormData({ name: &quot;&quot;, course: &quot;&quot;, semester: &quot;&quot;, city: &quot;&quot; });
+
+      fetchStudents();
+
+      setTimeout(() =&gt; setMessage(&quot;&quot;), 3000);
+
+  } catch (error) {
+
+      console.error(&quot;Error saving student:&quot;, error);
+
+      setMessage(&quot;Error saving student!&quot;);
+
+  }
+
+
+
+ };
+
+ const handleEdit = (student) =&gt; {
+
+  setFormData({
+
+
+
+      name: student.name,
+
+      course: student.course,
+
+      semester: student.semester,
+
+      city: student.city,
+
+  });
+
+  setEditingId(student.\_id);
+
+ };
+
+ const handleDelete = async (id) =&gt; {
+
+  try {
+
+      await axios.delete(\`\${apiUrl}/\${id}\`);
+
+      fetchStudents();
+
+      setMessage(&quot;Student deleted successfully!&quot;);
+
+      setTimeout(() =&gt; setMessage(&quot;&quot;), 3000);
+
+  } catch (error) {
+
+      console.error(&quot;Error deleting student:&quot;, error);
+
+  }
+
+ };
+
+ return (
+
+  \&lt;div className=&quot;container&quot;&gt;
+
+      \&lt;h1&gt;Student Management System\&lt;/h1&gt;
+
+      {message &amp;&amp; (
+
+       \&lt;p style={{ color: &quot;green&quot;, textAlign: &quot;center&quot;, fontWeight: &quot;bold&quot; }}&gt;
+
+           {message}
+
+       \&lt;/p&gt;
+
+      )}
+
+      \&lt;form onSubmit={handleSubmit}&gt;
+
+       \&lt;input
+
+           type=&quot;text&quot;
+
+           name=&quot;name&quot;
+
+           placeholder=&quot;Enter student name&quot;
+
+      value={formData.name}
+
+      onChange={handleChange}
+
+      required
+
+    /&gt;
+
+    \&lt;input
+
+      type=&quot;text&quot;
+
+      name=&quot;course&quot;
+
+      placeholder=&quot;Enter course&quot;
+
+      value={formData.course}
+
+      onChange={handleChange}
+
+      required
+
+    /&gt;
+
+    \&lt;input
+
+      type=&quot;number&quot;
+
+      name=&quot;semester&quot;
+
+      placeholder=&quot;Enter semester&quot;
+
+      value={formData.semester}
+
+      onChange={handleChange}
+
+      required
+
+    /&gt;
+
+    \&lt;input
+
+      type=&quot;text&quot;
+
+      name=&quot;city&quot;
+
+      placeholder=&quot;Enter city&quot;
+
+      value={formData.city}
+
+      onChange={handleChange}
+
+      required
+
+    /&gt;
+
+    \&lt;button type=&quot;submit&quot;&gt;
+
+      {editingId ? &quot;Update Student&quot; : &quot;AddStudent&quot;}
+
+    \&lt;/button&gt;
+
+   \&lt;/form&gt;
+
+   \&lt;table&gt;
+
+    \&lt;thead&gt;
+
+      \&lt;tr&gt;
+
+         \&lt;th&gt;Name\&lt;/th&gt;
+
+         \&lt;th&gt;Course\&lt;/th&gt;
+
+         \&lt;th&gt;Semester\&lt;/th&gt;
+
+         \&lt;th&gt;City\&lt;/th&gt;
+
+         \&lt;th&gt;Actions\&lt;/th&gt;
+
+      \&lt;/tr&gt;
+
+    \&lt;/thead&gt;
+
+    \&lt;tbody&gt;
+
+      {students.map((student) =&gt; (
+
+         \&lt;tr key={student.\_id}&gt;
+
+          \&lt;td&gt;{student.name}\&lt;/td&gt;
+
+          \&lt;td&gt;{student.course}\&lt;/td&gt;
+
+          \&lt;td&gt;{student.semester}\&lt;/td&gt;
+
+          \&lt;td&gt;{student.city}\&lt;/td&gt;
+
+          \&lt;td&gt;
+
+           \&lt;button onClick={() =&gt; handleEdit(student)}&gt;Edit\&lt;/button&gt;
+
+
+
+           \&lt;button onClick={() =&gt; handleDelete(student.\_id)}&gt;
+
+              Delete
+
+           \&lt;/button&gt;
+
+             \&lt;/td&gt;
+
+            \&lt;/tr&gt;
+
+           ))}
+
+          \&lt;/tbody&gt;
+
+         \&lt;/table&gt;
+
+     \&lt;/div&gt;
+
+    );
+
+}
+
+export default App;
+</code></pre><p class="text-[#cccccc] mb-2">In App.css</p><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+body {
+
+    font-family: Arial, sans-serif;
+
+    background-color: #f4f4f4;
+
+    margin: 0;
+
+
+
+}
+
+.container {
+
+    width: 85%;
+
+
+
+    margin: 30px auto;
+
+    background-color: white;
+
+    padding: 25px;
+
+    border-radius: 8px;
+
+}
+
+h1 {
+
+    text-align: center;
+
+}
+
+form {
+
+    display: flex;
+
+    gap: 10px;
+
+    flex-wrap: wrap;
+
+    margin-bottom: 25px;
+
+}
+
+input {
+
+    padding: 10px;
+
+    flex: 1;
+
+    min-width: 160px;
+
+}
+
+button {
+
+    padding: 10px 15px;
+
+    margin: 3px;
+
+    cursor: pointer;
+
+}
+
+table {
+
+    width: 100%;
+
+    border-collapse: collapse;
+
+}
+
+th,
+
+td {
+
+    border: 1px solid #cccccc;
+
+    padding: 10px;
+
+    text-align: left;
+
+}
+
+th {
+
+    background-color: #eeeeee;
+
+}
+</code></pre><h3 class="text-[#569cd6] font-semibold text-[16px] mb-2 mt-6">Execution</h3><p class="text-[#cccccc] mb-2">Keep two terminals running.</p><p class="text-[#cccccc] mb-2">Backend terminal</p><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+cd C:\MERN_Practicals\Practical_8
+
+node server.js
+</code></pre><p class="text-[#cccccc] mb-2">Frontend terminal</p><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+cd C:\MERN_Practicals\Practical_8\student-frontend
+
+npm run dev
+</code></pre><p class="text-[#cccccc] mb-2">Open:</p><pre class="bg-[#1e1e1e] border border-[#333333] rounded-md p-4 pt-10 overflow-x-auto font-mono text-[13px] text-[#d4d4d4]"><code>
+http\://localhost:5173
+</code></pre><p class="text-[#cccccc] mb-2">Output</p><p class="text-[#cccccc] mb-2">Practical 9 — Retrieve, add, update and delete student records</p></div>`
+            },
+            'mern-m2-aim10': {
+                filename: 'Aim10_CRUD.jsx',
+                breadcrumb: 'MERN > Module 2 > Aim 10',
+                title: '<span class="text-[#007acc]">Aim 10:</span> Complete MERN CRUD Application.',
+                description: `
+                <div class="mb-6 space-y-6">
+                    <div>
+                        <h3 class="text-[#569cd6] font-semibold text-[16px] mb-2">a. Design and Execute the Complete MERN Application.</h3>
+                        <p class="text-[#cccccc] mb-3">To organize and execute the complete MERN application using separate frontend and backend folders.</p>
+                        <p class="text-white font-semibold mb-1">Steps:</p>
+                        <p class="text-[#cccccc] mb-1">Create a folder named: <code class="bg-[#2d2d2d] px-1.5 py-0.5 rounded text-[#ce9178]">Practical-10</code></p>
+                        <p class="text-[#cccccc] mb-4">Inside it maintain the following structure.</p>
+
+                        <div class="ml-5 text-[#cccccc] space-y-6">
+                            <!-- Step 1 -->
+                            <div>
+                                <p class="font-semibold text-white text-[15px] mb-2">1. Create the Backend Folder</p>
+                                <p class="mb-2">Open the backend folder in Visual Studio Code and initialize the Node.js project:</p>
+                                <div class="code-container relative group mb-3 mt-2">
+                                    <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                    <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>npm init –y</code></pre>
+                                </div>
+                                <p class="mb-2">Install the required packages:</p>
+                                <div class="code-container relative group mb-2 mt-2">
+                                    <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                    <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>npm install express mongoose cors</code></pre>
+                                </div>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div>
+                                <p class="font-semibold text-white text-[15px] mb-2">2: Create server.js</p>
+                                <p class="text-[#4ec9b0] mb-2">Server.js</p>
+                                <div class="code-container relative group mb-4 mt-2">
+                                    <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                    <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+
+const app = express();
+const PORT = 3000;
+app.use(cors());
+app.use(express.json());
+mongoose
+ .connect("mongodb://127.0.0.1:27017/studentDB")
+
+ .then(() =&gt; {
+  console.log("MongoDB Connected Successfully");
+ })
+ .catch((error) =&gt; {
+  console.log("MongoDB Connection Error:", error);
+ });
+
+const studentSchema = new mongoose.Schema({
+ name: {
+  type: String,
+  required: true,
+ },
+ course: {
+  type: String,
+  required: true,
+ },
+ semester: {
+     type: Number,
+     required: true,
+ },
+ city: {
+     type: String,
+     required: true,
+ },
+});
+
+const Student = mongoose.model("Student", studentSchema);
+// CREATE Student
+app.post("/students", async (req, res) =&gt; {
+ try {
+     const student = new Student(req.body);
+     const savedStudent = await student.save();
+     res.status(201).json(savedStudent);
+ } catch (error) {
+     res.status(400).json({
+      message: "Unable to add student",
+      error: error.message,
+     });
+ }
+
+});
+// READ All Students
+app.get("/students", async (req, res) =&gt; {
+try {
+     const students = await Student.find();
+     res.json(students);
+ } catch (error) {
+     res.status(500).json({
+      message: "Unable to retrieve students",
+     });
+ }
+});
+// UPDATE Student
+app.put("/students/:id", async (req, res) =&gt; {
+ try {
+     const updatedStudent = await Student.findByIdAndUpdate(
+      req.params.id,
+      req.body,
+      {
+          new: true,
+          runValidators: true,
+      },
+     );
+     res.json(updatedStudent);
+ } catch (error) {
+     res.status(400).json({
+      message: "Unable to update student",
+      error: error.message,
+     });
+ }
+});
+// DELETE Student
+app.delete("/students/:id", async (req, res) =&gt; {
+ try {
+     await Student.findByIdAndDelete(req.params.id);
+     res.json({
+      message: "Student Deleted Successfully",
+     });
+
+ } catch (error) {
+     res.status(400).json({
+      message: "Unable to delete student",
+
+     });
+ }
+});
+app.listen(PORT, () =&gt; {
+ console.log(\`Server Running on Port \${PORT}\`);
+});</code></pre>
+                                </div>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div>
+                                <p class="font-semibold text-white text-[15px] mb-2">3. Create the React Frontend</p>
+                                <p class="mb-2">Open another terminal inside the Practical-10 folder and execute:</p>
+                                <div class="code-container relative group mb-3 mt-2">
+                                    <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                    <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>npm create vite@latest frontend</code></pre>
+                                </div>
+                                <div class="mb-4 space-y-1">
+                                    <p>Select:</p>
+                                    <p>Framework: React</p>
+                                    <p>Variant: JavaScript</p>
+                                    <p>When asked: Install with npm and start now?</p>
+                                    <p>Select: Yes</p>
+                                </div>
+
+                                <p class="text-[#4ec9b0] mt-4 mb-2">In App.jsx</p>
+                                <div class="code-container relative group mb-4 mt-2">
+                                    <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                    <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>import { useEffect, useState } from "react";
+import "./App.css";
+
+
+const apiUrl = "http://localhost:3000/students";
+
+
+async function request(url, options = {}) {
+    const response = await fetch(url, {
+        headers: { "Content-Type": "application/json" },
+        ...options,
+    });
+
+
+    if (!response.ok) {
+        throw new Error(\`Request failed with status \${response.status}\`);
+    }
+
+
+    return response.json();
+}
+
+
+function App() {
+    const [students, setStudents] = useState([]);
+    const [formData, setFormData] = useState({
+    name: "",
+        course: "",
+        semester: "",
+        city: "",
+
+    });
+    const [editingId, setEditingId] = useState(null);
+
+
+    const fetchStudents = async () =&gt; {
+        const data = await request(apiUrl);
+        setStudents(data);
+ };
+
+
+ useEffect(() =&gt; {
+  const loadStudents = async () =&gt; {
+      try {
+          await fetchStudents();
+      } catch (error) {
+          console.error("Unable to load students:", error);
+      }
+  };
+
+
+  loadStudents();
+ }, []);
+
+
+ const handleChange = (event) =&gt; {
+  setFormData({ ...formData, [event.target.name]: event.target.value });
+ };
+
+
+ const handleSubmit = async (event) =&gt; {
+  event.preventDefault();
+
+
+  try {
+      if (editingId) {
+          await request(\`\${apiUrl}/\${editingId}\`, {
+           method: "PUT",
+           body: JSON.stringify(formData),
+          });
+
+
+          setEditingId(null);
+      } else {
+          await request(apiUrl, {
+           method: "POST",
+           body: JSON.stringify(formData),
+
+          });
+      }
+
+
+      setFormData({ name: "", course: "", semester: "", city: "" });
+      await fetchStudents();
+  } catch (error) {
+      console.error("Unable to save student:", error);
+  }
+ };
+
+
+ const handleEdit = (student) =&gt; {
+  setFormData({
+      name: student.name,
+      course: student.course,
+      semester: student.semester,
+      city: student.city,
+  });
+  setEditingId(student._id);
+ };
+
+
+ const handleDelete = async (id) =&gt; {
+  try {
+      await request(\`\${apiUrl}/\${id}\`, { method: "DELETE" });
+      await fetchStudents();
+  } catch (error) {
+      console.error("Unable to delete student:", error);
+  }
+ };
+ return (
+  &lt;div className="main-bg"&gt;
+
+      &lt;header className="top-header"&gt;
+       MERN Student Management System
+       &lt;span&gt;React + Express + MongoDB&lt;/span&gt;
+      &lt;/header&gt;
+      &lt;div className="dashboard"&gt;
+       &lt;h2&gt;Complete MERN Application Dashboard&lt;/h2&gt;
+       &lt;div className="stats"&gt;
+        &lt;div className="stat-box"&gt;
+         &lt;p&gt;Total Students&lt;/p&gt;
+         &lt;h3&gt;{students.length}&lt;/h3&gt;
+        &lt;/div&gt;
+        &lt;div className="stat-box"&gt;
+         &lt;p&gt;Active Semester&lt;/p&gt;
+
+         &lt;h3&gt;5&lt;/h3&gt;
+        &lt;/div&gt;
+        &lt;div className="stat-box"&gt;
+         &lt;p&gt;Database Status&lt;/p&gt;
+         &lt;h3 className="connected"&gt;Connected&lt;/h3&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    &lt;form onSubmit={handleSubmit} className="dash-form"&gt;
+      &lt;input
+       type="text"
+       name="name"
+
+       placeholder="Enter student name"
+       value={formData.name}
+       onChange={handleChange}
+       required
+      /&gt;
+      &lt;input
+       type="text"
+       name="course"
+       placeholder="Enter course"
+       value={formData.course}
+       onChange={handleChange}
+       required
+      /&gt;
+      &lt;input
+       type="number"
+       name="semester"
+
+       placeholder="Enter semester"
+       value={formData.semester}
+       onChange={handleChange}
+       required
+      /&gt;
+      &lt;input
+       type="text"
+       name="city"
+       placeholder="Enter city"
+       value={formData.city}
+       onChange={handleChange}
+       required
+      /&gt;
+      &lt;button type="submit" className="add-btn"&gt;
+       {editingId ? "Update" : "Add Student"}
+      &lt;/button&gt;
+    &lt;/form&gt;
+    &lt;table&gt;
+      &lt;thead&gt;
+       &lt;tr&gt;
+           &lt;th&gt;Name&lt;/th&gt;
+           &lt;th&gt;Course&lt;/th&gt;
+           &lt;th&gt;Semester&lt;/th&gt;
+           &lt;th&gt;City&lt;/th&gt;
+           &lt;th&gt;Actions&lt;/th&gt;
+       &lt;/tr&gt;
+      &lt;/thead&gt;
+      &lt;tbody&gt;
+       {students.map((student) =&gt; (
+           &lt;tr key={student._id}&gt;
+            &lt;td&gt;{student.name}&lt;/td&gt;
+            &lt;td&gt;{student.course}&lt;/td&gt;
+            &lt;td&gt;{student.semester}&lt;/td&gt;
+                 &lt;td&gt;{student.city}&lt;/td&gt;
+                 &lt;td&gt;
+                  &lt;button
+                   className="edit-btn"
+                   onClick={() =&gt; handleEdit(student)}
+
+                  &gt;
+                   Edit
+                  &lt;/button&gt;
+
+                  &lt;button
+                   className="del-btn"
+                   onClick={() =&gt; handleDelete(student._id)}
+                  &gt;
+                   Delete
+                  &lt;/button&gt;
+                 &lt;/td&gt;
+             &lt;/tr&gt;
+            ))}
+           &lt;/tbody&gt;
+          &lt;/table&gt;
+          &lt;p className="footer"&gt;
+           B.Sc. Information Technology - Full Stack Development MERN Practice
+
+          &lt;/p&gt;
+         &lt;/div&gt;
+     &lt;/div&gt;
+    );
+}
+export default App;</code></pre>
+                                </div>
+
+                                <p class="text-[#4ec9b0] mt-4 mb-2">In App.css</p>
+                                <div class="code-container relative group mb-4 mt-2">
+                                    <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                    <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>body {
+margin: 0;
+    font-family: Arial, sans-serif;
+    background: #eef1f5;
+}
+.main-bg {
+    min-height: 100vh;
+
+}
+.top-header {
+    background: #1a1a2e;
+    color: white;
+    padding: 12px 25px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;
+}
+
+.top-header span {
+    font-size: 12px;
+    color: #aaa;
+}
+
+.dashboard {
+    width: 90%;
+    max-width: 1000px;
+    background: white;
+    margin: 20px auto;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.dashboard h2 {
+    margin-top: 0;
+}
+.stats {
+    display: flex;
+    gap: 15px;
+    margin: 20px 0;
+}
+
+.stat-box {
+    flex: 1;
+    background: #f8f9fa;
+
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+
+}
+.stat-box p {
+    margin: 0;
+    font-size: 12px;
+
+    color: #666;
+}
+.stat-box h3 {
+    margin: 5px 0 0 0;
+    font-size: 20px;
+}
+
+.connected {
+    color: #1a1a2e;
+}
+.dash-form {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+.dash-form input {
+    padding: 8px 10px;
+    flex: 1;
+    min-width: 130px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.add-btn {
+
+    background: #1a1a2e;
+    color: white;
+    border: none;
+
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th {
+    background: #f1f1f1;
+    text-align: left;
+    padding: 10px;
+    font-size: 13px;
+}
+td {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    font-size: 13px;
+}
+.edit-btn {
+    background: #6c757d;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+.del-btn {
+    background: #1a1a2e;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.footer {
+    text-align: center;
+    font-size: 11px;
+    color: #888;
+    margin-top: 20px;
+}</code></pre>
+                                </div>
+                            </div>
+
+                            <!-- Step 4 -->
+                            <div>
+                                <p class="font-semibold text-white text-[15px] mb-2">4. Install Axios</p>
+                                <p class="mb-2">Inside the frontend folder, execute:</p>
+                                <div class="code-container relative group mb-2 mt-2">
+                                    <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                    <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>npm install axios</code></pre>
+                                </div>
+                            </div>
+
+                            <!-- Step 5 -->
+                            <div>
+                                <p class="font-semibold text-white text-[15px] mb-2">5. Run the Backend</p>
+                                <p class="mb-2">Open a terminal inside the backend folder:</p>
+                                <div class="code-container relative group mb-3 mt-2">
+                                    <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                    <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>node server.js</code></pre>
+                                </div>
+                                <p class="mb-2">Expected terminal output:</p>
+                                <div class="code-container relative group mb-2 mt-2">
+                                    <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                    <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>MongoDB Connected Successfully
+Server Running on Port 3000</code></pre>
+                                </div>
+                            </div>
+
+                            <!-- Step 6 -->
+                            <div>
+                                <p class="font-semibold text-white text-[15px] mb-2">6: Run the Frontend</p>
+                                <p class="mb-2">Open another terminal inside the frontend folder:</p>
+                                <div class="code-container relative group mb-3 mt-2">
+                                    <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                    <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>npm run dev</code></pre>
+                                </div>
+                                <p class="mb-2">Open the displayed URL:</p>
+                                <div class="code-container relative group mb-3 mt-2">
+                                    <button class="absolute top-2 right-2 bg-[#2d2d2d] hover:bg-[#404040] text-[#cccccc] text-[11px] px-2 py-1 rounded font-mono transition-colors" onclick="copyCode(this)">Copy Code</button>
+                                    <pre class="bg-[#1e1e1e] border border-[#333333] p-4 pt-10 rounded-md overflow-x-auto text-[13px] font-mono m-0 text-[#d4d4d4]"><code>http://localhost:5173/</code></pre>
+                                </div>
+                                <p class="mt-3 font-semibold text-white">Output:</p>
+                                <p class="text-[#858585]">Practical 10 — Complete MERN CRUD application output</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                `
+            },
+            'dotnet-m1-aim1': {
+                filename: 'Program.cs',
+                breadcrumb: '.NET > Module 1 > Aim 1',
+                title: '<span class="text-[#007acc]">Aim 1:</span> .NET Setup',
+                description: '<p class="text-[#cccccc]">Data for .NET Module 1 will be updated here.</p>'
+            },
+            'ej-m1-aim1': {
+                filename: 'HelloWorld.java',
+                breadcrumb: 'EJ > Module 1 > Aim 1',
+                title: '<span class="text-[#007acc]">Aim 1:</span> EJ Setup',
+                description: '<p class="text-[#cccccc]">Data for EJ Module 1 will be updated here.</p>'
+            }
+        };
+
+        // --- HANDLE DYNAMIC CLICKS ---
+        const fileItems = document.querySelectorAll('.file-item');
+        const activeTabTitle = document.querySelector('#active-tab span:first-of-type');
+        const activeBreadcrumb = document.getElementById('active-breadcrumb');
+        const questionTitle = document.getElementById('question-title');
+        const questionDesc = document.getElementById('question-desc');
+        const prevBtn = document.getElementById('prev-btn');
+        const nextBtn = document.getElementById('next-btn');
+
+        // Order of topics for Next/Prev functionality
+        const topicOrder = [
+            'mern-m1-aim1', 'mern-m1-aim2', 'mern-m1-aim3', 'mern-m1-aim4', 'mern-m1-aim5', 
+            'mern-m2-aim6', 'mern-m2-aim7', 'mern-m2-aim8', 'mern-m2-aim9', 'mern-m2-aim10', 'dotnet-m1-aim1', 'ej-m1-aim1'
+        ];
+        let currentIndex = -1; // -1 means welcome screen
+
+        function updateNavButtons() {
+            prevBtn.disabled = currentIndex <= 0;
+            nextBtn.disabled = currentIndex === -1 || currentIndex >= topicOrder.length - 1;
+        }
+
+        function loadWelcome() {
+            currentIndex = -1;
+            activeTabTitle.innerText = 'welcome.md';
+            activeBreadcrumb.innerHTML = 'Workspace <span class="mx-1 text-gray-500">></span> <span class="text-[#cccccc]">welcome.md</span>';
+            questionTitle.innerHTML = '<span class="text-[#007acc]">Welcome</span>!';
+            questionDesc.innerHTML = '<p class="text-[#cccccc]">Select an Aim from the sidebar on the left (MERN, .NET, EJ) to view its details, description, and code here.</p>';
+            
+            // Remove active highlights
+            fileItems.forEach(f => {
+                f.classList.remove('bg-[#37373d]', 'text-[#007acc]');
+                f.classList.add('text-[#cccccc]');
+            });
+            updateNavButtons();
+        }
+
+        function loadTopic(dataId) {
+            const data = studyData[dataId];
+            if (!data) return;
+
+            currentIndex = topicOrder.indexOf(dataId);
+
+            // Update Sidebar Highlight
+            fileItems.forEach(f => {
+                f.classList.remove('bg-[#37373d]', 'text-[#007acc]');
+                f.classList.add('text-[#cccccc]');
+            });
+            const activeItem = document.querySelector(`.file-item[data-id="${dataId}"]`);
+            if (activeItem) {
+                activeItem.classList.remove('text-[#cccccc]');
+                activeItem.classList.add('bg-[#37373d]', 'text-[#007acc]');
+            }
+
+            // Update Content
+            activeTabTitle.innerText = data.filename;
+            const breadcrumbParts = data.breadcrumb.split(' > ');
+            activeBreadcrumb.innerHTML = `${breadcrumbParts[0]} <span class="mx-1 text-gray-500">></span> ${breadcrumbParts[1]} <span class="mx-1 text-gray-500">></span> <span class="text-[#cccccc]">${breadcrumbParts[2]}</span>`;
+            questionTitle.innerHTML = data.title;
+            questionDesc.innerHTML = data.description;
+            
+            updateNavButtons();
+        }
+
+        // Sidebar Item Click
+        fileItems.forEach(item => {
+            item.addEventListener('click', (e) => {
+                const dataId = e.currentTarget.getAttribute('data-id');
+                loadTopic(dataId);
+                if (window.innerWidth < 768) toggleSidebar(); // Close sidebar on mobile
+            });
+        });
+
+        // Prev/Next Buttons Click
+        prevBtn.addEventListener('click', () => {
+            if (currentIndex > 0) loadTopic(topicOrder[currentIndex - 1]);
+        });
+
+        nextBtn.addEventListener('click', () => {
+            if (currentIndex < topicOrder.length - 1) loadTopic(topicOrder[currentIndex + 1]);
+        });
+
+        // Close Tab Click
+        document.getElementById('close-tab-btn').addEventListener('click', (e) => {
+            e.stopPropagation();
+            loadWelcome();
+        });
+
+        // Standardized Copy Code Functionality
+        function copyCode(btn) {
+            // Find the pre tag right after the button
+            const preElement = btn.nextElementSibling;
+            if (!preElement) return;
+            
+            const codeText = preElement.innerText;
+            
+            // Create a temporary textarea to copy the text
+            const textArea = document.createElement("textarea");
+            textArea.value = codeText;
+            
+            // Prevent scrolling to the bottom of the page
+            textArea.style.top = "0";
+            textArea.style.left = "0";
+            textArea.style.position = "fixed";
+            
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            
+            try {
+                document.execCommand('copy');
+                const originalText = btn.innerText;
+                btn.innerText = 'Copied!';
+                setTimeout(() => { btn.innerText = 'Copy Code'; }, 2000);
+            } catch (err) {
+                console.error('Unable to copy', err);
+            }
+            
+            document.body.removeChild(textArea);
+        }
+    </script>
+</body>
+</html>
